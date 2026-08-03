@@ -171,18 +171,6 @@ export const metadata: Metadata = {
     locale: "en_US",
 
     type: "website",
-
-    images: [
-      {
-        url: "/opengraph-image.png",
-
-        width: 1200,
-
-        height: 630,
-
-        alt: "Prathamesh Rane Portfolio",
-      },
-    ],
   },
 
   // -----------------------------------------------------------
