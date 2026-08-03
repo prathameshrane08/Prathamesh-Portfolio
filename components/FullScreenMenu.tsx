@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, X } from "lucide-react";
+
+import TransitionLink from "@/components/transitions/TransitionLink";
+import { siteConfig } from "@/data/site";
 
 type FullScreenMenuProps = {
   isOpen: boolean;
@@ -11,24 +13,25 @@ type FullScreenMenuProps = {
 };
 
 const menuLinks = [
-  { number: "01", label: "Home", href: "/#top" },
-  { number: "02", label: "Projects", href: "/#projects" },
-  { number: "03", label: "About", href: "/#about" },
-  { number: "04", label: "Contact", href: "/#contact" },
-];
-
-const socialLinks = [
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    number: "01",
+    label: "Home",
+    href: "/",
   },
   {
-    label: "GitHub",
-    href: "https://github.com/",
+    number: "02",
+    label: "Projects",
+    href: "/#projects",
   },
   {
-    label: "Email",
-    href: "mailto:prathamesh.r2018@gmail.com",
+    number: "03",
+    label: "About",
+    href: "/#about",
+  },
+  {
+    number: "04",
+    label: "Contact",
+    href: "/#contact",
   },
 ];
 
@@ -38,9 +41,9 @@ export default function FullScreenMenu({
 }: FullScreenMenuProps) {
   const [time, setTime] = useState("");
 
-  // Update Dresden time
+  // Update the local Dresden time once every second.
   useEffect(() => {
-    const updateTime = () => {
+    function updateTime() {
       const currentTime = new Intl.DateTimeFormat("en-GB", {
         timeZone: "Europe/Berlin",
         hour: "2-digit",
@@ -50,7 +53,7 @@ export default function FullScreenMenu({
       }).format(new Date());
 
       setTime(currentTime);
-    };
+    }
 
     updateTime();
 
@@ -61,7 +64,7 @@ export default function FullScreenMenu({
     };
   }, []);
 
-  // Prevent background scrolling while menu is open
+  // Prevent the page behind the menu from scrolling.
   useEffect(() => {
     if (!isOpen) {
       document.body.style.overflow = "";
@@ -75,13 +78,13 @@ export default function FullScreenMenu({
     };
   }, [isOpen]);
 
-  // Close menu with Escape
+  // Allow Escape to close the menu.
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
+    function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         onClose();
       }
-    };
+    }
 
     window.addEventListener("keydown", handleEscape);
 
@@ -97,9 +100,15 @@ export default function FullScreenMenu({
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
-          initial={{ y: "-100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "-100%" }}
+          initial={{
+            y: "-100%",
+          }}
+          animate={{
+            y: 0,
+          }}
+          exit={{
+            y: "-100%",
+          }}
           transition={{
             duration: 0.8,
             ease: [0.76, 0, 0.24, 1],
@@ -109,14 +118,14 @@ export default function FullScreenMenu({
           <div className="mx-auto flex min-h-screen w-[calc(100%-32px)] max-w-[1600px] flex-col md:w-[calc(100%-64px)]">
             {/* Menu header */}
             <div className="flex items-center justify-between py-6">
-              <Link
+              <TransitionLink
                 href="/"
                 onClick={onClose}
                 className="text-xl font-semibold tracking-[-0.06em]"
                 aria-label="Prathamesh Rane homepage"
               >
                 PR<span className="text-white">.</span>
-              </Link>
+              </TransitionLink>
 
               <button
                 type="button"
@@ -131,7 +140,7 @@ export default function FullScreenMenu({
               </button>
             </div>
 
-            {/* Menu links */}
+            {/* Main menu links */}
             <div className="flex flex-1 flex-col justify-center py-14 md:py-16">
               <nav aria-label="Full-screen navigation">
                 {menuLinks.map((link, index) => (
@@ -151,7 +160,7 @@ export default function FullScreenMenu({
                       ease: [0.22, 1, 0.36, 1],
                     }}
                   >
-                    <Link
+                    <TransitionLink
                       href={link.href}
                       onClick={onClose}
                       className="group grid grid-cols-[40px_1fr_auto] items-center gap-3 border-t border-black/30 py-4 last:border-b md:grid-cols-[70px_1fr_auto] md:gap-6 md:py-5"
@@ -168,10 +177,10 @@ export default function FullScreenMenu({
                         <ArrowUpRight
                           size={24}
                           strokeWidth={1.4}
-                          className="transition-transform duration-300 group-hover:rotate-45 md:h-8 md:w-8"
+                          className="transition-transform duration-300 group-hover:rotate-45"
                         />
                       </span>
-                    </Link>
+                    </TransitionLink>
                   </motion.div>
                 ))}
               </nav>
@@ -194,40 +203,67 @@ export default function FullScreenMenu({
               className="grid gap-8 border-t border-black/30 py-6 text-sm md:grid-cols-3 md:items-end"
             >
               <div>
-                <p className="mb-1 text-black/50">Location</p>
-                <p>Dresden, Germany</p>
+                <p className="mb-1 text-black/50">
+                  Location
+                </p>
+
+                <p>{siteConfig.location}</p>
               </div>
 
               <div>
-                <p className="mb-1 text-black/50">Local time</p>
-                <p>{time || "--:--:--"} CET</p>
+                <p className="mb-1 text-black/50">
+                  Local time
+                </p>
+
+                <p>{time || "--:--:--"}</p>
               </div>
 
               <div className="flex flex-wrap gap-x-6 gap-y-3 md:justify-end">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target={
-                      link.href.startsWith("http") ? "_blank" : undefined
-                    }
-                    rel={
-                      link.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="group flex items-center gap-1"
-                  >
-                    <span className="transition-opacity group-hover:opacity-50">
-                      {link.label}
-                    </span>
+                <a
+                  href={siteConfig.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-1"
+                >
+                  <span className="transition-opacity group-hover:opacity-50">
+                    LinkedIn
+                  </span>
 
-                    <ArrowUpRight
-                      size={14}
-                      className="transition-transform duration-300 group-hover:rotate-45"
-                    />
-                  </a>
-                ))}
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform duration-300 group-hover:rotate-45"
+                  />
+                </a>
+
+                <a
+                  href={siteConfig.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-1"
+                >
+                  <span className="transition-opacity group-hover:opacity-50">
+                    GitHub
+                  </span>
+
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform duration-300 group-hover:rotate-45"
+                  />
+                </a>
+
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="group flex items-center gap-1"
+                >
+                  <span className="transition-opacity group-hover:opacity-50">
+                    Email
+                  </span>
+
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform duration-300 group-hover:rotate-45"
+                  />
+                </a>
               </div>
             </motion.div>
           </div>

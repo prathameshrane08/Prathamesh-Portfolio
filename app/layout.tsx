@@ -15,8 +15,11 @@
 // ✓ Global CSS
 // ✓ Smooth Scrolling
 // ✓ Custom Cursor
-// ✓ Loading Effects
-// ✓ Font & Theme
+// ✓ Loading Screen
+// ✓ Scroll Progress Bar
+// ✓ Page Transition Provider
+// ✓ Transition Overlay
+// ✓ Page Fade Animation
 //
 // Documentation:
 // https://nextjs.org/docs/app/api-reference/file-conventions/layout
@@ -24,53 +27,42 @@
 
 import type { Metadata } from "next";
 
+import "./globals.css";
+
 import AppEffects from "@/components/AppEffects";
 import SmoothScroll from "@/components/SmoothScroll";
 
-import "./globals.css";
+import PageTransition from "@/components/transitions/PageTransition";
+import TransitionOverlay from "@/components/transitions/TransitionOverlay";
+import { TransitionProvider } from "@/components/transitions/TransitionContext";
 
 // =============================================================
 // WEBSITE URL
 //
-// Replace this after deployment if your final URL changes.
+// IMPORTANT
+// ----------
+// Update this if you connect a custom domain.
 //
 // Example:
 //
 // https://prathameshrane.com
 //
-// or
-//
-// https://prathamesh-portfolio.vercel.app
 // =============================================================
 const WEBSITE_URL =
-  "https://prathamesh-portfolio-ruddy.vercel.app";;
+  "https://prathamesh-portfolio-ruddy.vercel.app";
 
 // =============================================================
-// GLOBAL WEBSITE METADATA
+// GLOBAL METADATA
 //
-// Search engines, LinkedIn, WhatsApp, Twitter,
-// Discord and many others use this information.
+// Search engines, LinkedIn, WhatsApp,
+// Discord, Slack and Twitter use this.
 //
-// This metadata automatically applies to
-// every page unless overridden.
+// This metadata automatically applies
+// to every page.
 // =============================================================
 export const metadata: Metadata = {
-  // -----------------------------------------------------------
-  // Base URL
-  //
-  // Allows relative URLs like:
-  //
-  // "/opengraph-image.png"
-  //
-  // to automatically become:
-  //
-  // https://yourwebsite.com/opengraph-image.png
-  // -----------------------------------------------------------
   metadataBase: new URL(WEBSITE_URL),
 
-  // -----------------------------------------------------------
-  // Browser Title
-  // -----------------------------------------------------------
   title: {
     default:
       "Prathamesh Rane | AI, Robotics & Software Engineering",
@@ -78,18 +70,9 @@ export const metadata: Metadata = {
     template: "%s | Prathamesh Rane",
   },
 
-  // -----------------------------------------------------------
-  // Description
-  // -----------------------------------------------------------
   description:
     "Portfolio of Prathamesh Rane, a Computational Modeling and Simulation master's student at TU Dresden working across Artificial Intelligence, Robotics, Machine Learning, Data Visualization and Software Engineering.",
 
-  // -----------------------------------------------------------
-  // Keywords
-  //
-  // These don't carry much ranking weight today,
-  // but they're still useful metadata.
-  // -----------------------------------------------------------
   keywords: [
     "Prathamesh Rane",
     "Portfolio",
@@ -113,9 +96,6 @@ export const metadata: Metadata = {
     "Germany",
   ],
 
-  // -----------------------------------------------------------
-  // Author Information
-  // -----------------------------------------------------------
   authors: [
     {
       name: "Prathamesh Rane",
@@ -127,11 +107,6 @@ export const metadata: Metadata = {
 
   publisher: "Prathamesh Rane",
 
-  // -----------------------------------------------------------
-  // Robots
-  //
-  // Tell search engines to index every page.
-  // -----------------------------------------------------------
   robots: {
     index: true,
     follow: true,
@@ -140,23 +115,12 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
 
-      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 
-  // -----------------------------------------------------------
-  // Open Graph
-  //
-  // Used by:
-  //
-  // ✓ LinkedIn
-  // ✓ Facebook
-  // ✓ Discord
-  // ✓ Slack
-  // ✓ WhatsApp
-  // -----------------------------------------------------------
   openGraph: {
     title:
       "Prathamesh Rane | AI, Robotics & Software Engineering",
@@ -173,9 +137,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  // -----------------------------------------------------------
-  // Twitter (X)
-  // -----------------------------------------------------------
   twitter: {
     card: "summary_large_image",
 
@@ -185,20 +146,9 @@ export const metadata: Metadata = {
     description:
       "Portfolio showcasing Artificial Intelligence, Robotics, Machine Learning and Software Engineering.",
 
-    images: ["/opengraph-image.png"],
-
-    creator: "@YOUR_TWITTER_USERNAME",
+    creator: "Prathamesh Rane",
   },
 
-  // -----------------------------------------------------------
-  // Icons
-  //
-  // Next.js automatically finds:
-  //
-  // app/icon.png
-  //
-  // but explicitly declaring them is recommended.
-  // -----------------------------------------------------------
   icons: {
     icon: "/icon.png",
 
@@ -207,19 +157,32 @@ export const metadata: Metadata = {
     apple: "/icon.png",
   },
 
-  // -----------------------------------------------------------
-  // Category
-  // -----------------------------------------------------------
   category: "technology",
 };
 
 // =============================================================
-// Root Layout
+// ROOT LAYOUT
 //
-// Everything rendered by the application appears here.
+// Everything inside the application is rendered here.
 //
-// SmoothScroll wraps every page,
-// giving the entire website smooth scrolling.
+// Order:
+//
+// TransitionProvider
+//      ↓
+//
+// AppEffects
+//      ↓
+//
+// TransitionOverlay
+//      ↓
+//
+// SmoothScroll
+//      ↓
+//
+// PageTransition
+//      ↓
+//
+// Current Page
 // =============================================================
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -229,7 +192,10 @@ export default function RootLayout({
   children,
 }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
         className="
           bg-[#f1efe9]
@@ -238,13 +204,30 @@ export default function RootLayout({
           overflow-x-hidden
         "
       >
-        {/* Global cursor + loading effects */}
-        <AppEffects />
+        {/* ===================================================
+            Global Transition Manager
+        ==================================================== */}
+        <TransitionProvider>
 
-        {/* Smooth scrolling */}
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+          {/* Loader + Cursor + Scroll Progress */}
+          <AppEffects />
+
+          {/* Black transition overlay */}
+          <TransitionOverlay />
+
+          {/* Smooth scrolling */}
+          <SmoothScroll>
+
+            {/* Fade animation for every page */}
+            <PageTransition>
+
+              {children}
+
+            </PageTransition>
+
+          </SmoothScroll>
+
+        </TransitionProvider>
       </body>
     </html>
   );

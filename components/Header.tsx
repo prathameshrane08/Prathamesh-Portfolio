@@ -1,31 +1,43 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+
+import TransitionLink from "@/components/transitions/TransitionLink";
 
 type HeaderProps = {
   onMenuOpen: () => void;
 };
 
 const navigation = [
-  { label: "Projects", href: "#projects" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  {
+    label: "Projects",
+    href: "#projects",
+  },
+  {
+    label: "About",
+    href: "#about",
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+  },
 ];
 
-export default function Header({ onMenuOpen }: HeaderProps) {
+export default function Header({
+  onMenuOpen,
+}: HeaderProps) {
   return (
     <header className="relative z-40 mx-auto flex w-[calc(100%-32px)] max-w-[1600px] items-center justify-between py-6 md:w-[calc(100%-64px)]">
-      {/* Logo */}
-      <Link
+      {/* Page navigation uses TransitionLink */}
+      <TransitionLink
         href="/"
         className="text-xl font-semibold tracking-[-0.06em]"
         aria-label="Prathamesh Rane homepage"
       >
         PR<span className="text-[#ff4d2e]">.</span>
-      </Link>
+      </TransitionLink>
 
-      {/* Desktop navigation */}
+      {/* Same-page links do not need a page transition */}
       <nav
         className="hidden items-center gap-8 md:flex"
         aria-label="Main navigation"
@@ -47,7 +59,6 @@ export default function Header({ onMenuOpen }: HeaderProps) {
         ))}
       </nav>
 
-      {/* Menu button */}
       <button
         type="button"
         onClick={onMenuOpen}

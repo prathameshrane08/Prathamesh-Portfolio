@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
+import TransitionLink from "@/components/transitions/TransitionLink";
 import { projects } from "@/data/projects";
 
 export default function Projects() {
@@ -13,26 +13,47 @@ export default function Projects() {
       id="projects"
       className="mx-auto w-[calc(100%-32px)] max-w-[1600px] pb-28 md:w-[calc(100%-64px)] md:pb-44"
     >
-      {/* Keeps older #work links functional */}
-      <div id="work" className="scroll-mt-24" />
+      {/* Keeps old #work links functional */}
+      <div
+        id="work"
+        className="scroll-mt-24"
+      />
 
       {/* Section heading */}
       <div className="mb-16 flex items-end justify-between">
         <div>
           <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{
+              opacity: 0,
+              y: 25,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
             className="mb-5 text-xs uppercase tracking-[0.22em] text-black/50 md:text-sm"
           >
             Selected work
           </motion.p>
 
           <motion.h2
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{
+              opacity: 0,
+              y: 60,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
             transition={{
               duration: 0.8,
               ease: [0.22, 1, 0.36, 1],
@@ -71,11 +92,12 @@ export default function Projects() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            <Link
+            {/* This link now starts the black page transition */}
+            <TransitionLink
               href={`/work/${project.slug}`}
               className={`group relative block min-h-[620px] overflow-hidden rounded-[32px] ${project.background} md:min-h-[720px]`}
             >
-              {/* Project image */}
+              {/* Project preview image */}
               {project.cardImage && (
                 <div className="absolute inset-x-4 top-4 h-[48%] overflow-hidden rounded-[24px] bg-black/5 md:inset-x-5 md:top-5">
                   <Image
@@ -86,12 +108,11 @@ export default function Projects() {
                     className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                   />
 
-                  {/* Improves text and image contrast */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
                 </div>
               )}
 
-              {/* Fallback visual when no image exists */}
+              {/* Fallback when no image exists */}
               {!project.cardImage && (
                 <>
                   <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -102,7 +123,7 @@ export default function Projects() {
                 </>
               )}
 
-              {/* Top information */}
+              {/* Card top */}
               <div className="absolute inset-x-6 top-6 z-20 flex items-start justify-between md:inset-x-8 md:top-8">
                 <span
                   className={`text-sm ${
@@ -119,12 +140,8 @@ export default function Projects() {
                 </span>
               </div>
 
-              {/* Project content */}
-              <div
-                className={`absolute inset-x-7 bottom-7 z-20 md:inset-x-9 md:bottom-9 ${
-                  project.cardImage ? "" : "max-w-xl"
-                }`}
-              >
+              {/* Card content */}
+              <div className="absolute inset-x-7 bottom-7 z-20 md:inset-x-9 md:bottom-9">
                 <p className="mb-4 text-xs uppercase tracking-[0.18em] text-black/55 md:text-sm">
                   {project.category}
                 </p>
@@ -152,7 +169,7 @@ export default function Projects() {
                   </span>
                 </div>
               </div>
-            </Link>
+            </TransitionLink>
           </motion.article>
         ))}
       </div>
