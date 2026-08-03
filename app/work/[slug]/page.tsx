@@ -25,6 +25,18 @@ import {
   projects,
 } from "@/data/projects";
 
+// ============================================================
+// PROJECT PAGE PROPS
+//
+// The slug identifies which project should be displayed.
+//
+// Example:
+//
+// /work/robocasa-robot-learning
+//
+// slug = "robocasa-robot-learning"
+// ============================================================
+
 type ProjectPageProps = {
   params: Promise<{
     slug: string;
@@ -35,7 +47,11 @@ type ProjectPageProps = {
 // STATIC PROJECT ROUTES
 //
 // Next.js creates every project page during the build.
+//
+// Adding a new project to data/projects.ts automatically
+// adds a new static project page.
 // ============================================================
+
 export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
@@ -44,7 +60,11 @@ export function generateStaticParams() {
 
 // ============================================================
 // DYNAMIC PROJECT METADATA
+//
+// Every project receives its own browser title
+// and search-engine description.
 // ============================================================
+
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
@@ -64,9 +84,22 @@ export async function generateMetadata({
   };
 }
 
+// ============================================================
+// VALIDATE PROJECT LINKS
+//
+// Placeholder links use "#".
+//
+// We hide GitHub and live-demo buttons until a real URL
+// is added inside data/projects.ts.
+// ============================================================
+
 function isValidProjectLink(link?: string) {
   return Boolean(link && link !== "#");
 }
+
+// ============================================================
+// PROJECT PAGE
+// ============================================================
 
 export default async function ProjectPage({
   params,
@@ -89,9 +122,11 @@ export default async function ProjectPage({
       {/* =====================================================
           PROJECT HERO
       ====================================================== */}
+
       <section
         className={`relative min-h-screen overflow-hidden ${project.background}`}
       >
+        {/* Decorative project number */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-8 top-12 text-[18rem] font-medium leading-none tracking-[-0.12em] text-black/[0.045] sm:text-[24rem] lg:text-[34rem]"
@@ -100,6 +135,7 @@ export default async function ProjectPage({
         </div>
 
         <div className="relative z-10 mx-auto flex min-h-screen w-[calc(100%-32px)] max-w-[1600px] flex-col justify-between py-8 md:w-[calc(100%-64px)] md:py-10">
+          {/* Hero navigation */}
           <div className="flex items-center justify-between">
             <TransitionLink
               href="/#projects"
@@ -112,7 +148,7 @@ export default async function ProjectPage({
                 />
               </span>
 
-              Back to projects
+              <span>Back to projects</span>
             </TransitionLink>
 
             <span className="hidden text-sm text-black/50 sm:block">
@@ -120,6 +156,7 @@ export default async function ProjectPage({
             </span>
           </div>
 
+          {/* Hero content */}
           <div className="py-20 md:py-28">
             <p className="mb-6 max-w-2xl text-xs uppercase tracking-[0.2em] text-black/55 md:text-sm">
               {project.category}
@@ -134,35 +171,25 @@ export default async function ProjectPage({
             </p>
           </div>
 
+          {/* Hero details */}
           <div className="grid gap-6 border-t border-black/20 py-7 text-sm sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <p className="mb-2 text-black/45">
-                Role
-              </p>
-
+              <p className="mb-2 text-black/45">Role</p>
               <p>{project.role}</p>
             </div>
 
             <div>
-              <p className="mb-2 text-black/45">
-                Institution
-              </p>
-
+              <p className="mb-2 text-black/45">Institution</p>
               <p>{project.institution}</p>
             </div>
 
             <div>
-              <p className="mb-2 text-black/45">
-                Duration
-              </p>
-
+              <p className="mb-2 text-black/45">Duration</p>
               <p>{project.duration}</p>
             </div>
 
             <div className="lg:text-right">
-              <p className="mb-2 text-black/45">
-                Project
-              </p>
+              <p className="mb-2 text-black/45">Project</p>
 
               <p>
                 {project.number} /{" "}
@@ -176,8 +203,10 @@ export default async function ProjectPage({
       {/* =====================================================
           PROJECT METADATA
       ====================================================== */}
+
       <section className="border-b border-black/15">
         <div className="mx-auto grid w-[calc(100%-32px)] max-w-[1600px] md:w-[calc(100%-64px)] md:grid-cols-2 lg:grid-cols-4">
+          {/* Year */}
           <article className="border-b border-black/15 py-10 md:border-r md:px-8 lg:border-b-0">
             <CalendarDays
               size={22}
@@ -185,15 +214,14 @@ export default async function ProjectPage({
               className="mb-8"
             />
 
-            <p className="text-sm text-black/45">
-              Year
-            </p>
+            <p className="text-sm text-black/45">Year</p>
 
             <p className="mt-2 text-xl font-medium">
               {project.year}
             </p>
           </article>
 
+          {/* Duration */}
           <article className="border-b border-black/15 py-10 md:px-8 lg:border-b-0 lg:border-r">
             <Clock3
               size={22}
@@ -201,15 +229,14 @@ export default async function ProjectPage({
               className="mb-8"
             />
 
-            <p className="text-sm text-black/45">
-              Duration
-            </p>
+            <p className="text-sm text-black/45">Duration</p>
 
             <p className="mt-2 text-xl font-medium">
               {project.duration}
             </p>
           </article>
 
+          {/* Role */}
           <article className="border-b border-black/15 py-10 md:border-r md:px-8 lg:border-b-0">
             <UserRound
               size={22}
@@ -217,15 +244,14 @@ export default async function ProjectPage({
               className="mb-8"
             />
 
-            <p className="text-sm text-black/45">
-              My role
-            </p>
+            <p className="text-sm text-black/45">My role</p>
 
             <p className="mt-2 text-xl font-medium">
               {project.role}
             </p>
           </article>
 
+          {/* Institution */}
           <article className="py-10 md:px-8">
             <Building2
               size={22}
@@ -247,10 +273,13 @@ export default async function ProjectPage({
       {/* =====================================================
           OVERVIEW
       ====================================================== */}
+
       <section className="mx-auto grid w-[calc(100%-32px)] max-w-[1400px] gap-14 py-28 md:w-[calc(100%-64px)] md:grid-cols-[0.65fr_1.35fr] md:py-40">
-        <p className="text-xs uppercase tracking-[0.2em] text-black/45 md:text-sm">
-          01 · Overview
-        </p>
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-black/45 md:text-sm">
+            01 · Overview
+          </p>
+        </div>
 
         <div>
           <h2 className="max-w-5xl text-[clamp(2.8rem,5.5vw,6rem)] font-medium leading-[0.95] tracking-[-0.06em]">
@@ -264,8 +293,9 @@ export default async function ProjectPage({
       </section>
 
       {/* =====================================================
-          METRICS
+          PROJECT METRICS
       ====================================================== */}
+
       <section className="mx-auto w-[calc(100%-32px)] max-w-[1600px] pb-28 md:w-[calc(100%-64px)] md:pb-40">
         <div className="grid border-t border-black/20 sm:grid-cols-2 lg:grid-cols-4">
           {project.metrics.map((metric, index) => (
@@ -292,6 +322,7 @@ export default async function ProjectPage({
       {/* =====================================================
           MAIN PROJECT IMAGE
       ====================================================== */}
+
       <section className="mx-auto w-[calc(100%-32px)] max-w-[1600px] md:w-[calc(100%-64px)]">
         {project.heroImage ? (
           <div className="relative aspect-[16/10] overflow-hidden rounded-[28px] bg-black/5 md:rounded-[48px]">
@@ -329,6 +360,10 @@ export default async function ProjectPage({
               <h2 className="mt-5 text-4xl font-medium tracking-[-0.05em] md:text-6xl">
                 {project.shortTitle}
               </h2>
+
+              <p className="mx-auto mt-6 max-w-xl leading-relaxed text-black/55">
+                Project screenshots and diagrams will be added here.
+              </p>
             </div>
           </div>
         )}
@@ -337,6 +372,7 @@ export default async function ProjectPage({
       {/* =====================================================
           CHALLENGE, APPROACH AND OUTCOME
       ====================================================== */}
+
       <section className="mx-auto w-[calc(100%-32px)] max-w-[1400px] py-28 md:w-[calc(100%-64px)] md:py-44">
         <div className="grid border-t border-black/20">
           {[
@@ -381,6 +417,7 @@ export default async function ProjectPage({
       {/* =====================================================
           PROJECT GALLERY
       ====================================================== */}
+
       {project.gallery && project.gallery.length > 0 && (
         <section className="mx-auto w-[calc(100%-32px)] max-w-[1600px] pb-28 md:w-[calc(100%-64px)] md:pb-44">
           <div className="mb-14">
@@ -394,10 +431,12 @@ export default async function ProjectPage({
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {project.gallery.map((image, index) => (
+            {project.gallery.map((galleryImage, index) => (
               <figure
-                key={image.src}
-                className={index === 0 ? "md:col-span-2" : ""}
+                key={galleryImage.src}
+                className={
+                  index === 0 ? "md:col-span-2" : ""
+                }
               >
                 <div
                   className={`relative overflow-hidden rounded-[28px] bg-black/5 ${
@@ -407,8 +446,8 @@ export default async function ProjectPage({
                   }`}
                 >
                   <Image
-                    src={image.src}
-                    alt={image.alt}
+                    src={galleryImage.src}
+                    alt={galleryImage.alt}
                     fill
                     sizes={
                       index === 0
@@ -419,9 +458,9 @@ export default async function ProjectPage({
                   />
                 </div>
 
-                {image.caption && (
+                {galleryImage.caption && (
                   <figcaption className="mt-4 max-w-3xl text-sm leading-relaxed text-black/50">
-                    {image.caption}
+                    {galleryImage.caption}
                   </figcaption>
                 )}
               </figure>
@@ -433,6 +472,7 @@ export default async function ProjectPage({
       {/* =====================================================
           DEVELOPMENT PROCESS
       ====================================================== */}
+
       <section className="bg-[#111111] text-white">
         <div className="mx-auto w-[calc(100%-32px)] max-w-[1600px] py-28 md:w-[calc(100%-64px)] md:py-40">
           <div className="grid gap-12 md:grid-cols-2 md:items-end">
@@ -480,8 +520,9 @@ export default async function ProjectPage({
       </section>
 
       {/* =====================================================
-          TECHNOLOGY
+          TECHNOLOGY STACK
       ====================================================== */}
+
       <section className="mx-auto grid w-[calc(100%-32px)] max-w-[1400px] gap-14 py-28 md:w-[calc(100%-64px)] md:grid-cols-[0.65fr_1.35fr] md:py-40">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-black/45 md:text-sm">
@@ -500,6 +541,7 @@ export default async function ProjectPage({
             Tools and technologies.
           </h2>
 
+          {/* Technology pills */}
           <div className="mt-14 flex flex-wrap gap-3">
             {project.technologies.map((technology) => (
               <span
@@ -511,38 +553,70 @@ export default async function ProjectPage({
             ))}
           </div>
 
+          {/* External project links */}
           {(hasGitHubLink || hasLiveDemoLink) && (
             <div className="mt-14 flex flex-wrap gap-4">
+              {/* =============================================
+                  GITHUB BUTTON FIX
+
+                  The text and icons are explicitly white.
+
+                  !text-white overrides any inherited global
+                  anchor colour that may otherwise turn them black.
+              ============================================== */}
+
               {hasGitHubLink && (
                 <a
                   href={project.github}
                   target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-white transition-transform duration-300 hover:-translate-y-1"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title} on GitHub`}
+                  className="group inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 !text-white transition-all duration-300 hover:-translate-y-1 hover:bg-black/85"
                 >
-                  <FaGithub className="h-[19px] w-[19px]" />
+                  <FaGithub className="h-[19px] w-[19px] shrink-0 text-white" />
 
-                  <span>View GitHub</span>
+                  <span className="text-white">
+                    View GitHub
+                  </span>
 
-                  <ArrowUpRight size={17} />
+                  <ArrowUpRight
+                    size={17}
+                    className="shrink-0 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
                 </a>
               )}
 
+              {/* Live project button */}
               {hasLiveDemoLink && (
                 <a
                   href={project.liveDemo}
                   target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center gap-3 rounded-full border border-black/25 px-7 py-4 transition-all duration-300 hover:-translate-y-1 hover:bg-black hover:text-white"
+                  rel="noopener noreferrer"
+                  aria-label={`Open the live ${project.title} project`}
+                  className="group inline-flex items-center gap-3 rounded-full border border-black/25 px-7 py-4 text-black transition-all duration-300 hover:-translate-y-1 hover:bg-black hover:!text-white"
                 >
-                  <ExternalLink size={18} />
+                  <ExternalLink
+                    size={18}
+                    className="shrink-0"
+                  />
 
                   <span>View live project</span>
 
-                  <ArrowUpRight size={17} />
+                  <ArrowUpRight
+                    size={17}
+                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
                 </a>
               )}
             </div>
+          )}
+
+          {/* Placeholder message */}
+          {!hasGitHubLink && !hasLiveDemoLink && (
+            <p className="mt-12 max-w-xl text-sm leading-relaxed text-black/45">
+              Repository and live-project links will appear here after
+              valid URLs are added to the project data.
+            </p>
           )}
         </div>
       </section>
@@ -550,6 +624,7 @@ export default async function ProjectPage({
       {/* =====================================================
           NEXT PROJECT
       ====================================================== */}
+
       <section className={nextProject.background}>
         <TransitionLink
           href={`/work/${nextProject.slug}`}
@@ -591,6 +666,7 @@ export default async function ProjectPage({
       {/* =====================================================
           FOOTER
       ====================================================== */}
+
       <footer className="bg-[#111111] text-white">
         <div className="mx-auto flex w-[calc(100%-32px)] max-w-[1600px] flex-col justify-between gap-6 py-8 text-sm text-white/50 md:w-[calc(100%-64px)] md:flex-row">
           <p>

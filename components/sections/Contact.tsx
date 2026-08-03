@@ -74,15 +74,20 @@ export default function Contact() {
           {/* Email button */}
           <a
             href={`mailto:${siteConfig.email}`}
-            className="group inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-white transition-transform duration-300 hover:-translate-y-1"
+            className="group inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 !text-white transition-all duration-300 hover:-translate-y-1 hover:bg-black/85"
           >
-            <Mail size={18} />
+            <Mail
+              size={18}
+              className="text-white"
+            />
 
-            Start a conversation
+            <span className="text-white">
+              Start a conversation
+            </span>
 
             <ArrowUpRight
               size={17}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              className="text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
             />
           </a>
 
