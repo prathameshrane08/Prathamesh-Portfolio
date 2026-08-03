@@ -35,19 +35,8 @@ import { projects } from "@/data/projects";
 export default function sitemap(): MetadataRoute.Sitemap {
 
   // ---------------------------------------------------
-  // IMPORTANT
-  //
-  // Replace this after deployment.
-  //
-  // Example:
-  // https://prathameshrane.vercel.app
-  //
-  // or
-  //
-  // https://prathameshrane.com
-  // ---------------------------------------------------
   const baseUrl =
-    "https://prathamesh-portfolio.vercel.app";
+    "https://prathamesh-portfolio-ruddy.vercel.app";
 
   // ===================================================
   // Create sitemap entries for every project page.

@@ -27,11 +27,10 @@ import type { MetadataRoute } from "next";
 // =====================================================
 export default function robots(): MetadataRoute.Robots {
 
-  // ---------------------------------------------------
-  // Replace this after deployment.
+  
   // ---------------------------------------------------
   const baseUrl =
-    "https://prathamesh-portfolio.vercel.app";
+    "https://prathamesh-portfolio-ruddy.vercel.app";
 
   return {
 

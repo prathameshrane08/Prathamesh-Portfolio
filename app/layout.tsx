@@ -43,7 +43,7 @@ import "./globals.css";
 // https://prathamesh-portfolio.vercel.app
 // =============================================================
 const WEBSITE_URL =
-  "https://prathamesh-portfolio.vercel.app";
+  "https://prathamesh-portfolio-ruddy.vercel.app";;
 
 // =============================================================
 // GLOBAL WEBSITE METADATA
