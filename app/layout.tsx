@@ -179,7 +179,7 @@ export const metadata: Metadata = {
       "Portfolio showcasing Artificial Intelligence, Robotics, Machine Learning, Data Visualization and Software Engineering projects.",
 
     images: [
-      "/opengraph-image.png",
+      "/social-preview.png",
     ],
   },
 
