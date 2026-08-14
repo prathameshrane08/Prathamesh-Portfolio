@@ -135,160 +135,163 @@ export const projects: Project[] = [
       },
     ],
 
-    cardImage: "/projects/robocasa/hero.png",
-    heroImage: "/projects/robocasa/hero.png",
+        cardImage: "/projects/robocasa/card.webp",
+        heroImage: "/projects/robocasa/hero.png",
 
-    gallery: [
-      {
-        src: "/projects/robocasa/simulation.png",
-        alt: "RoboCasa kitchen simulation environment",
-        caption:
-          "Exploring realistic household environments and robot configurations in RoboCasa.",
-      },
-      {
-        src: "/projects/robocasa/teleoperation.png",
-        alt: "Robot teleoperation inside a RoboCasa environment",
-        caption:
-          "Using human control to investigate robot movement and demonstration collection.",
-      },
-      {
-        src: "/projects/robocasa/task-structure.png",
-        alt: "Source-code structure of a RoboCasa atomic task",
-        caption:
-          "Studying task definitions, success conditions and environment configuration.",
-      },
-      {
-        src: "/projects/robocasa/pipeline.png",
-        alt: "Architecture of the RoboCasa robot-learning pipeline",
-        caption:
-          "The planned workflow from simulation and demonstrations to policy training and evaluation.",
-      },
-    ],
-
-    // Replace # with the real repository URL
+        gallery: [
+          {
+            src: "/projects/robocasa/overview.webp",
+            alt: "RoboCasa robot learning platform overview",
+            caption:
+              "RoboCasa combines diverse kitchen environments, household objects, manipulation skills and long-horizon robot-learning tasks.",
+          },
+          {
+            src: "/projects/robocasa/layouts.png",
+            alt: "Different RoboCasa kitchen layouts",
+            caption:
+              "RoboCasa provides visually and structurally diverse kitchen environments for household robot-learning experiments.",
+          },
+          {
+            src: "/projects/robocasa/environment-01.png",
+            alt: "RoboCasa simulated kitchen environment with robot",
+            caption:
+              "A simulated household environment used to explore robot interaction, manipulation and task execution.",
+          },
+          {
+            src: "/projects/robocasa/environment-02.png",
+            alt: "Alternative RoboCasa kitchen simulation",
+            caption:
+              "Different scene configurations help evaluate robot behaviour across varied household environments.",
+          },
+        ],
     github: "https://github.com/prathameshrane08",
   },
 
   {
-    slug: "banking-ai-dashboard",
-    number: "02",
-    title: "AI-Powered Banking Dashboard",
-    shortTitle: "Banking AI",
-    category: "Generative AI · Data Storytelling",
-    description:
-      "A personal-finance dashboard that transforms transaction data into understandable stories and actionable recommendations.",
+  slug: "banking-ai-dashboard",
+  number: "02",
+  title: "AI-Powered Banking Dashboard",
+  shortTitle: "Banking AI",
+  category: "GENERATIVE AI · DATA STORYTELLING",
 
-    year: "2026",
-    duration: "Ongoing",
-    role: "Product Designer and Developer",
-    institution: "Independent Research Project",
+  description:
+    "An ongoing personal-finance project exploring how AI-generated narratives can turn transaction data into understandable stories and actionable insights.",
 
-    background: "bg-[#ff7557]",
+  year: "2026",
+  duration: "Ongoing",
+  role: "Product Designer and Developer",
+  institution: "Independent Project",
 
-    overview:
-      "This project explores an AI-powered data-storytelling platform that helps users understand their spending behaviour without requiring them to interpret complex financial charts independently.",
+  background: "bg-[#ff7557]",
 
-    challenge:
-      "Traditional banking dashboards present balances, charts and transaction lists but often fail to explain why spending changed, whether a pattern is risky or what the user can practically do next.",
+  overview:
+    "This ongoing project explores an AI-powered data-storytelling experience for personal finance. Instead of requiring users to interpret charts independently, the dashboard is designed to combine visual exploration with concise natural-language explanations of their spending behaviour.",
 
-    approach:
-      "The system combines transaction categorisation, period comparisons, interactive visualisations and natural-language explanations. Its storytelling structure explains what changed, why it happened and which action could improve the user's financial situation.",
+  challenge:
+    "Traditional banking dashboards provide balances, charts and transaction histories, but users still have to determine what changed, what caused the change and whether it requires attention.",
 
-    outcome:
-      "The dashboard is designed to provide clear explanations of spending changes, likely budget risks and practical recommendations based on the user's financial behaviour.",
+  approach:
+    "I designed the concept around three storytelling questions: what changed, why did it change and what could the user do next. The proposed workflow combines transaction categorisation, period comparisons, interactive visualisations and AI-generated explanations.",
 
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Python",
-      "Large Language Models",
-      "Data Visualisation",
-      "PostgreSQL",
-    ],
+  outcome:
+    "The current concept establishes the dashboard structure, storytelling framework and interaction flow. Development is ongoing, with the next stage focused on implementing the data pipeline and AI-generated narrative layer.",
 
-    metrics: [
-      {
-        value: "6+",
-        label: "Spending categories",
-      },
-      {
-        value: "3",
-        label: "Story layers",
-      },
-      {
-        value: "AI",
-        label: "Generated insights",
-      },
-      {
-        value: "24/7",
-        label: "Financial guidance",
-      },
-    ],
+  technologies: [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Python",
+    "Large Language Models",
+    "Data Visualisation",
+    "PostgreSQL",
+  ],
 
-    process: [
-      {
-        number: "01",
-        title: "User problem",
-        description:
-          "Identified the difficulty users face when interpreting charts, categories and transaction changes in traditional banking dashboards.",
-      },
-      {
-        number: "02",
-        title: "Story framework",
-        description:
-          "Designed a narrative structure explaining what changed, why it changed and what the user could do next.",
-      },
-      {
-        number: "03",
-        title: "Dashboard design",
-        description:
-          "Created an interaction model supporting category, time-period and transaction-level exploration.",
-      },
-      {
-        number: "04",
-        title: "AI integration",
-        description:
-          "Prepared the architecture for generating personalised financial explanations and recommendations.",
-      },
-    ],
+  metrics: [
+    {
+      value: "3",
+      label: "Story layers",
+    },
+    {
+      value: "3",
+      label: "Exploration levels",
+    },
+    {
+      value: "AI",
+      label: "Narrative layer",
+    },
+    {
+      value: "WIP",
+      label: "Project status",
+    },
+  ],
 
-    cardImage: "/projects/banking/dashboard.png",
-    heroImage: "/projects/banking/dashboard.png",
+  process: [
+    {
+      number: "01",
+      title: "Problem discovery",
+      description:
+        "Identified the gap between displaying financial data and helping users understand what their spending patterns actually mean.",
+    },
+    {
+      number: "02",
+      title: "Story framework",
+      description:
+        "Structured each financial narrative around three questions: what changed, why did it change and what could the user do next.",
+    },
+    {
+      number: "03",
+      title: "Exploration design",
+      description:
+        "Designed a drill-down experience from monthly spending patterns to categories, weekly behaviour and individual transactions.",
+    },
+    {
+      number: "04",
+      title: "AI narrative layer",
+      description:
+        "Designed the architecture for connecting structured financial data with personalised natural-language explanations and actionable insights.",
+    },
+  ],
 
-    gallery: [
-      {
-        src: "/projects/banking/spending-story.png",
-        alt: "AI-generated personal finance spending story",
-        caption:
-          "A narrative explanation showing what changed in the user's spending.",
-      },
-      {
-        src: "/projects/banking/category-view.png",
-        alt: "Interactive spending category exploration",
-        caption:
-          "Category-level exploration with comparisons across different time periods.",
-      },
-      {
-        src: "/projects/banking/insights.png",
-        alt: "Personalised financial insights and recommendations",
-        caption:
-          "Actionable recommendations generated from transaction patterns.",
-      },
-    ],
+  cardImage: "/projects/banking/card.png",
+  heroImage: "/projects/banking/card.png",
 
-    github: "https://github.com/prathameshrane08",
-    liveDemo: "#",
-  },
+  /*
+  Gallery will be enabled once the dashboard
+  prototype visuals are ready.
 
-  {
+  gallery: [
+    {
+      src: "/projects/banking/spending-story.png",
+      alt: "AI-powered personal finance spending story",
+      caption:
+        "A narrative layer designed to explain significant changes in a user's spending behaviour.",
+    },
+    {
+      src: "/projects/banking/category-view.png",
+      alt: "Interactive spending category exploration",
+      caption:
+        "A drill-down interface for exploring spending by category, time period and transaction.",
+    },
+    {
+      src: "/projects/banking/insights.png",
+      alt: "Personalised financial insight concept",
+      caption:
+        "A concept for turning detected financial patterns into understandable and actionable recommendations.",
+    },
+  ],
+  */
+
+  github: "https://github.com/prathameshrane08",
+},
+
+    {
     slug: "cutato-booking-platform",
     number: "03",
     title: "Cutato Booking Platform",
     shortTitle: "Cutato",
     category: "Full-Stack Development · Conversational AI",
     description:
-      "A role-based haircut-booking platform with dynamic pricing, intelligent scheduling and a conversational booking assistant.",
+      "An intelligent haircut-booking platform combining live availability, dynamic pricing, AI-assisted discovery and a guided hairstyle consultation.",
 
     year: "2026",
     duration: "Ongoing",
@@ -298,16 +301,16 @@ export const projects: Project[] = [
     background: "bg-[#b8a6ff]",
 
     overview:
-      "Cutato is a digital booking platform connecting customers, barbers and salons through a unified service-discovery, scheduling and appointment-management experience.",
+      "Cutato is a full-stack booking platform designed to simplify how customers discover barbers, compare services and availability, receive personalised guidance and complete appointments through a unified digital experience.",
 
     challenge:
-      "Salon booking involves multiple users, changing availability, service selection, dynamic prices, payments, appointment conflicts and different management responsibilities.",
+      "A modern booking experience must coordinate changing availability, service duration, appointment slots, pricing, payments and booking conflicts while remaining simple for the customer. The challenge was to bring these workflows together without making the booking process feel complicated.",
 
     approach:
-      "I developed role-based portals, dynamic slot generation, demand-based pricing, booking management and a conversational assistant designed to guide customers through service discovery and appointment creation.",
+      "I built an end-to-end booking flow with dynamic slot generation, availability checking, reservation handling, demand-aware pricing and appointment management. I also developed a conversational assistant for service discovery and a guided hairstyle consultation that captures user characteristics and preferences to provide more personalised recommendations.",
 
     outcome:
-      "The platform provides a complete booking journey covering service selection, barber discovery, slot selection, pricing, payment, confirmation and appointment management.",
+      "The resulting platform supports the customer journey from barber and service discovery through live availability, intelligent pricing, appointment selection, payment and booking management, while AI-assisted features provide additional guidance before the appointment.",
 
     technologies: [
       "Next.js",
@@ -321,10 +324,6 @@ export const projects: Project[] = [
 
     metrics: [
       {
-        value: "3",
-        label: "User roles",
-      },
-      {
         value: "30m",
         label: "Booking slots",
       },
@@ -336,61 +335,77 @@ export const projects: Project[] = [
         value: "Live",
         label: "Dynamic pricing",
       },
+      {
+        value: "End-to-end",
+        label: "Booking flow",
+      },
     ],
 
     process: [
       {
         number: "01",
-        title: "Booking flow",
+        title: "Booking experience",
         description:
-          "Designed the complete customer journey from selecting a service to confirming and managing an appointment.",
+          "Designed the customer journey from barber and service discovery through slot selection, payment, confirmation and appointment management.",
       },
       {
         number: "02",
         title: "Scheduling engine",
         description:
-          "Built dynamic slot generation, availability checking, reservation locking and appointment rescheduling.",
+          "Built dynamic slot generation, availability checking, reservation handling and appointment rescheduling around service duration and barber availability.",
       },
       {
         number: "03",
-        title: "Role-based portals",
+        title: "Dynamic pricing",
         description:
-          "Created separate experiences for customers, barbers and salon administrators.",
+          "Introduced demand-aware pricing so appointment prices can respond to quieter, normal and busier booking periods.",
       },
       {
         number: "04",
-        title: "Conversational assistant",
+        title: "AI-assisted experience",
         description:
-          "Integrated an assistant capable of answering questions and guiding users through the booking process.",
+          "Integrated a conversational booking assistant and a guided hairstyle consultation to help users explore services and receive more personalised recommendations.",
       },
     ],
 
-    cardImage: "/projects/cutato/booking.png",
-    heroImage: "/projects/cutato/booking.png",
+    cardImage: "/projects/cutato/hero.png",
+    heroImage: "/projects/cutato/hero.png",
 
     gallery: [
       {
-        src: "/projects/cutato/services.png",
-        alt: "Cutato service selection interface",
+        src: "/projects/cutato/hero.png",
+        alt: "Cutato barber booking platform",
         caption:
-          "Users can explore services, prices and available barbers.",
+          "The Cutato customer experience combines barber discovery, live availability and intelligent booking.",
       },
       {
-        src: "/projects/cutato/slots.png",
-        alt: "Cutato appointment slot selection",
+        src: "/projects/cutato/booking.png",
+        alt: "Cutato booking flow",
         caption:
-          "Dynamic availability and demand-aware pricing during appointment selection.",
+          "Customers can select a barber and service while reviewing live availability, pricing and booking details.",
       },
       {
         src: "/projects/cutato/assistant.png",
         alt: "Cutato conversational booking assistant",
         caption:
-          "An intelligent assistant that helps users complete the booking process.",
+          "The conversational assistant helps users understand services and navigate the booking experience.",
+      },
+      {
+        src: "/projects/cutato/consultation.png",
+        alt: "Cutato AI hairstyle consultation",
+        caption:
+          "A guided hairstyle consultation provides personalised recommendations based on the user's characteristics and preferences.",
+      },
+      {
+        src: "/projects/cutato/consultation-flow.png",
+        alt: "Cutato hairstyle consultation flow",
+        caption:
+          "The multi-step consultation captures information such as face shape, hair characteristics and styling preferences.",
       },
     ],
 
     github: "https://github.com/prathameshrane08",
-    liveDemo: "#",
+    liveDemo: "https://github.com/prathameshrane08",
   },
 
   {
@@ -409,9 +424,9 @@ export const projects: Project[] = [
 
     background: "bg-[#8ed8ff]",
 
-    overview:
-      "This research investigates how interpretable semantic maps can be inferred automatically from linguistic colexification and connectivity constraints.",
-
+    overview: 
+      "This research explores how semantic maps can be inferred automatically by representing lexical observations as connectivity constraints and constructing sparse graphs that preserve those constraints.",
+    
     challenge:
       "The goal is to construct a sparse graph in which the semantic frames associated with every lexical constraint induce a connected subgraph.",
 
@@ -434,70 +449,76 @@ export const projects: Project[] = [
     metrics: [
       {
         value: "100",
-        label: "Algorithm runs",
+        label: "Randomised runs",
       },
       {
-        value: "8",
+        value: "13",
         label: "Semantic frames",
+      },
+      {
+        value: "20",
+        label: "Connectivity constraints",
       },
       {
         value: "2",
         label: "Stability measures",
-      },
-      {
-        value: "O(log R)",
-        label: "Approximation",
       },
     ],
 
     process: [
       {
         number: "01",
-        title: "Problem formalisation",
+        title: "Constraint modelling",
         description:
-          "Represented semantic frames as graph vertices and lexical observations as connectivity constraints.",
+          "Represented semantic frames as graph vertices and lexical observations as connectivity constraints that must induce connected subgraphs.",
       },
       {
         number: "02",
         title: "Greedy inference",
         description:
-          "Added candidate edges according to their reduction in disconnected constraint components.",
+          "Selected edges according to how much they reduced the number of disconnected components across the active constraints.",
       },
       {
         number: "03",
-        title: "Run aggregation",
+        title: "Repeated-run aggregation",
         description:
-          "Repeated the randomised algorithm and aggregated frequently selected edges across multiple runs.",
+          "Repeated the randomised tie-breaking procedure across multiple runs and counted how frequently each edge was selected.",
       },
       {
         number: "04",
-        title: "Stability analysis",
+        title: "Stability evaluation",
         description:
-          "Evaluated agreement between inferred networks using pairwise Jaccard similarity and entropy.",
+          "Evaluated agreement between inferred networks using pairwise Jaccard similarity and entropy-based stability.",
       },
     ],
 
-    cardImage: "/projects/semantic-maps/network.png",
-    heroImage: "/projects/semantic-maps/network.png",
+    cardImage: "/projects/semantic-map/core.png",
+    heroImage: "/projects/semantic-map/aggregated.png",
 
     gallery: [
       {
-        src: "/projects/semantic-maps/constraints.png",
-        alt: "Semantic map connectivity constraints",
+        src: "/projects/semantic-map/core.png",
+        alt: "Core inferred semantic map",
         caption:
-          "Lexical observations represented as graph connectivity requirements.",
+          "The final constraint-preserving network retains the most stable connections found across repeated inference runs.",
       },
       {
-        src: "/projects/semantic-maps/aggregation.png",
-        alt: "Aggregated semantic network edges",
+        src: "/projects/semantic-map/aggregated.png",
+        alt: "Aggregated semantic map from repeated greedy inference runs",
         caption:
-          "Frequently selected edges aggregated across repeated randomised runs.",
+          "Edges selected repeatedly across randomised runs are aggregated, with higher frequencies indicating more stable structural relationships.",
       },
       {
-        src: "/projects/semantic-maps/stability.png",
-        alt: "Semantic network stability evaluation",
+        src: "/projects/semantic-map/colexification.png",
+        alt: "Initial frame colexification network",
         caption:
-          "Agreement between inferred networks evaluated using Jaccard similarity and entropy.",
+          "The original colexification graph is much denser and serves as the starting structure from which a sparse interpretable network is inferred.",
+      },
+      {
+        src: "/projects/semantic-map/manual-map.png",
+        alt: "Manually constructed semantic map",
+        caption:
+          "A manually constructed semantic map provides a qualitative reference for comparing the structure recovered by the inference algorithm.",
       },
     ],
 

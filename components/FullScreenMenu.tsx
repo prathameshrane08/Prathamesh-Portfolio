@@ -21,17 +21,17 @@ const menuLinks = [
   {
     number: "02",
     label: "Projects",
-    href: "/#projects",
+    href: "#projects",
   },
   {
     number: "03",
     label: "About",
-    href: "/#about",
+    href: "#about",
   },
   {
     number: "04",
     label: "Contact",
-    href: "/#contact",
+    href: "#contact",
   },
 ];
 

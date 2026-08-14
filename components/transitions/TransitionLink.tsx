@@ -5,6 +5,7 @@ import type {
   MouseEvent,
   ReactNode,
 } from "react";
+
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -13,24 +14,29 @@ import { useTransition } from "@/components/transitions/TransitionContext";
 // ============================================================
 // TRANSITION LINK
 //
-// Use this instead of Next.js <Link> when moving between pages.
+// PURPOSE
+// -------
+// Behaves like Next.js <Link>, but plays our transition
+// animation before changing routes.
 //
-// It does not animate:
-// - External links
-// - Same-page anchor links
-// - New-tab clicks
-// - Cmd/Ctrl/Shift/Alt clicks
+// IMPORTANT
+// ---------
+// We extend normal anchor attributes.
+//
+// That means this component now supports:
+//
+// data-cursor="VIEW"
+// aria-label="..."
+// target="_blank"
+// rel="..."
+// etc.
 // ============================================================
 
-type TransitionLinkProps = {
-  href: string;
-  children: ReactNode;
-  className?: string;
-  onClick?: AnchorHTMLAttributes<HTMLAnchorElement>["onClick"];
-  "aria-label"?: string;
-  target?: string;
-  rel?: string;
-};
+type TransitionLinkProps =
+  AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string;
+    children: ReactNode;
+  };
 
 export default function TransitionLink({
   href,
@@ -39,7 +45,21 @@ export default function TransitionLink({
   onClick,
   target,
   rel,
-  "aria-label": ariaLabel,
+
+  // ==========================================================
+  // IMPORTANT
+  //
+  // Everything we don't explicitly destructure goes here.
+  //
+  // Example:
+  //
+  // data-cursor="VIEW"
+  //
+  // becomes part of ...restProps
+  //
+  // and is forwarded to the actual <Link>.
+  // ==========================================================
+  ...restProps
 }: TransitionLinkProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -50,11 +70,12 @@ export default function TransitionLink({
     endTransition,
   } = useTransition();
 
-  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    // Run any click handler supplied by the parent component.
+  function handleClick(
+    event: MouseEvent<HTMLAnchorElement>,
+  ) {
+    // Run an existing parent click handler first.
     onClick?.(event);
 
-    // Stop if the parent handler already cancelled navigation.
     if (event.defaultPrevented) {
       return;
     }
@@ -65,7 +86,8 @@ export default function TransitionLink({
       event.shiftKey ||
       event.altKey;
 
-    const opensNewTab = target === "_blank";
+    const opensNewTab =
+      target === "_blank";
 
     const isExternalLink =
       href.startsWith("http://") ||
@@ -73,13 +95,14 @@ export default function TransitionLink({
       href.startsWith("mailto:") ||
       href.startsWith("tel:");
 
-    const isSamePageAnchor = href.startsWith("#");
+    const isSamePageAnchor =
+      href.startsWith("#");
 
     const isCurrentRoute =
       href === pathname ||
       href === `${pathname}/`;
 
-    // Keep normal browser behaviour for these links.
+    // Keep normal browser behaviour for these.
     if (
       isModifiedClick ||
       opensNewTab ||
@@ -92,18 +115,18 @@ export default function TransitionLink({
 
     event.preventDefault();
 
-    // Prevent repeated clicks while the overlay is active.
+    // Prevent repeated clicks while transition is active.
     if (active) {
       return;
     }
 
     startTransition();
 
-    // Wait for the overlay to cover the page.
+    // Wait for overlay to cover current page.
     window.setTimeout(() => {
       router.push(href);
 
-      // Remove the overlay after the new route mounts.
+      // Remove overlay once new route has appeared.
       window.setTimeout(() => {
         endTransition();
       }, 550);
@@ -117,7 +140,13 @@ export default function TransitionLink({
       className={className}
       target={target}
       rel={rel}
-      aria-label={ariaLabel}
+
+      // ======================================================
+      // THIS IS THE IMPORTANT FIX.
+      //
+      // data-cursor now reaches the real <a> element.
+      // ======================================================
+      {...restProps}
     >
       {children}
     </Link>

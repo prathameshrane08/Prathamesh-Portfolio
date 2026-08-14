@@ -17,6 +17,8 @@ import {
 
 import { FaGithub } from "react-icons/fa";
 
+import MagneticButton from "@/components/ui/MagneticButton";
+import ProjectGallery from "@/components/project/ProjectGallery";
 import TransitionLink from "@/components/transitions/TransitionLink";
 
 import {
@@ -27,14 +29,6 @@ import {
 
 // ============================================================
 // PROJECT PAGE PROPS
-//
-// The slug identifies which project should be displayed.
-//
-// Example:
-//
-// /work/robocasa-robot-learning
-//
-// slug = "robocasa-robot-learning"
 // ============================================================
 
 type ProjectPageProps = {
@@ -45,11 +39,6 @@ type ProjectPageProps = {
 
 // ============================================================
 // STATIC PROJECT ROUTES
-//
-// Next.js creates every project page during the build.
-//
-// Adding a new project to data/projects.ts automatically
-// adds a new static project page.
 // ============================================================
 
 export function generateStaticParams() {
@@ -59,10 +48,7 @@ export function generateStaticParams() {
 }
 
 // ============================================================
-// DYNAMIC PROJECT METADATA
-//
-// Every project receives its own browser title
-// and search-engine description.
+// PROJECT METADATA
 // ============================================================
 
 export async function generateMetadata({
@@ -85,12 +71,7 @@ export async function generateMetadata({
 }
 
 // ============================================================
-// VALIDATE PROJECT LINKS
-//
-// Placeholder links use "#".
-//
-// We hide GitHub and live-demo buttons until a real URL
-// is added inside data/projects.ts.
+// LINK VALIDATION
 // ============================================================
 
 function isValidProjectLink(link?: string) {
@@ -114,8 +95,31 @@ export default async function ProjectPage({
 
   const nextProject = getNextProject(project.slug);
 
-  const hasGitHubLink = isValidProjectLink(project.github);
-  const hasLiveDemoLink = isValidProjectLink(project.liveDemo);
+  const hasGitHubLink = isValidProjectLink(
+    project.github,
+  );
+
+  const hasLiveDemoLink = isValidProjectLink(
+    project.liveDemo,
+  );
+
+  // ==========================================================
+  // PROJECT-SPECIFIC OVERVIEW HEADINGS
+  //
+  // This prevents every project from using the same generic
+  // heading.
+  // ==========================================================
+
+  const overviewHeading =
+    project.slug === "semantic-map-inference"
+      ? "Inferring semantic structure from linguistic data."
+      : project.slug === "cutato-booking-platform"
+        ? "Designing an intelligent booking experience."
+        : project.slug === "robocasa-robot-learning"
+          ? "Building a robot-learning pipeline for household manipulation."
+          : project.slug === "banking-ai-dashboard"
+            ? "Turning financial data into understandable stories."
+            : "Building a thoughtful solution for a complex problem.";
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f1efe9] text-[#111111]">
@@ -129,22 +133,68 @@ export default async function ProjectPage({
         {/* Decorative project number */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-8 top-12 text-[18rem] font-medium leading-none tracking-[-0.12em] text-black/[0.045] sm:text-[24rem] lg:text-[34rem]"
+          className="
+            pointer-events-none
+            absolute
+            -right-8
+            top-12
+            text-[18rem]
+            font-medium
+            leading-none
+            tracking-[-0.12em]
+            text-black/[0.045]
+            sm:text-[24rem]
+            lg:text-[34rem]
+          "
         >
           {project.number}
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-screen w-[calc(100%-32px)] max-w-[1600px] flex-col justify-between py-8 md:w-[calc(100%-64px)] md:py-10">
-          {/* Hero navigation */}
+        <div
+          className="
+            relative
+            z-10
+            mx-auto
+            flex
+            min-h-screen
+            w-[calc(100%-32px)]
+            max-w-[1600px]
+            flex-col
+            justify-between
+            py-8
+            md:w-[calc(100%-64px)]
+            md:py-10
+          "
+        >
+          {/* Navigation */}
           <div className="flex items-center justify-between">
             <TransitionLink
               href="/#projects"
               className="group inline-flex items-center gap-3 text-sm font-medium"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-black/25 transition-colors duration-300 group-hover:bg-black group-hover:text-white">
+              <span
+                className="
+                  flex
+                  h-11
+                  w-11
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-black/25
+                  transition-colors
+                  duration-300
+                  group-hover:bg-black
+                  group-hover:text-white
+                "
+              >
                 <ArrowLeft
                   size={17}
-                  className="transition-transform duration-300 group-hover:-translate-x-1"
+                  className="
+                    transition-transform
+                    duration-300
+                    group-hover:-translate-x-1
+                  "
                 />
               </span>
 
@@ -158,42 +208,94 @@ export default async function ProjectPage({
 
           {/* Hero content */}
           <div className="py-20 md:py-28">
-            <p className="mb-6 max-w-2xl text-xs uppercase tracking-[0.2em] text-black/55 md:text-sm">
+            <p
+              className="
+                mb-6
+                max-w-2xl
+                text-xs
+                uppercase
+                tracking-[0.2em]
+                text-black/55
+                md:text-sm
+              "
+            >
               {project.category}
             </p>
 
-            <h1 className="max-w-[1300px] text-[clamp(4rem,10vw,10rem)] font-medium leading-[0.84] tracking-[-0.075em]">
+            <h1
+              className="
+                max-w-[1400px]
+                text-[clamp(4rem,9vw,9rem)]
+                font-medium
+                leading-[0.84]
+                tracking-[-0.075em]
+              "
+            >
               {project.title}
             </h1>
 
-            <p className="mt-10 max-w-3xl text-lg leading-relaxed text-black/65 md:text-2xl">
+            <p
+              className="
+                mt-10
+                max-w-3xl
+                text-lg
+                leading-relaxed
+                text-black/65
+                md:text-2xl
+              "
+            >
               {project.description}
             </p>
           </div>
 
           {/* Hero details */}
-          <div className="grid gap-6 border-t border-black/20 py-7 text-sm sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            className="
+              grid
+              gap-6
+              border-t
+              border-black/20
+              py-7
+              text-sm
+              sm:grid-cols-2
+              lg:grid-cols-4
+            "
+          >
             <div>
-              <p className="mb-2 text-black/45">Role</p>
+              <p className="mb-2 text-black/45">
+                Role
+              </p>
+
               <p>{project.role}</p>
             </div>
 
             <div>
-              <p className="mb-2 text-black/45">Institution</p>
+              <p className="mb-2 text-black/45">
+                Institution
+              </p>
+
               <p>{project.institution}</p>
             </div>
 
             <div>
-              <p className="mb-2 text-black/45">Duration</p>
+              <p className="mb-2 text-black/45">
+                Duration
+              </p>
+
               <p>{project.duration}</p>
             </div>
 
             <div className="lg:text-right">
-              <p className="mb-2 text-black/45">Project</p>
+              <p className="mb-2 text-black/45">
+                Project
+              </p>
 
               <p>
                 {project.number} /{" "}
-                {String(projects.length).padStart(2, "0")}
+                {String(projects.length).padStart(
+                  2,
+                  "0",
+                )}
               </p>
             </div>
           </div>
@@ -205,8 +307,17 @@ export default async function ProjectPage({
       ====================================================== */}
 
       <section className="border-b border-black/15">
-        <div className="mx-auto grid w-[calc(100%-32px)] max-w-[1600px] md:w-[calc(100%-64px)] md:grid-cols-2 lg:grid-cols-4">
-          {/* Year */}
+        <div
+          className="
+            mx-auto
+            grid
+            w-[calc(100%-32px)]
+            max-w-[1600px]
+            md:w-[calc(100%-64px)]
+            md:grid-cols-2
+            lg:grid-cols-4
+          "
+        >
           <article className="border-b border-black/15 py-10 md:border-r md:px-8 lg:border-b-0">
             <CalendarDays
               size={22}
@@ -214,14 +325,15 @@ export default async function ProjectPage({
               className="mb-8"
             />
 
-            <p className="text-sm text-black/45">Year</p>
+            <p className="text-sm text-black/45">
+              Year
+            </p>
 
             <p className="mt-2 text-xl font-medium">
               {project.year}
             </p>
           </article>
 
-          {/* Duration */}
           <article className="border-b border-black/15 py-10 md:px-8 lg:border-b-0 lg:border-r">
             <Clock3
               size={22}
@@ -229,14 +341,15 @@ export default async function ProjectPage({
               className="mb-8"
             />
 
-            <p className="text-sm text-black/45">Duration</p>
+            <p className="text-sm text-black/45">
+              Duration
+            </p>
 
             <p className="mt-2 text-xl font-medium">
               {project.duration}
             </p>
           </article>
 
-          {/* Role */}
           <article className="border-b border-black/15 py-10 md:border-r md:px-8 lg:border-b-0">
             <UserRound
               size={22}
@@ -244,14 +357,15 @@ export default async function ProjectPage({
               className="mb-8"
             />
 
-            <p className="text-sm text-black/45">My role</p>
+            <p className="text-sm text-black/45">
+              My role
+            </p>
 
             <p className="mt-2 text-xl font-medium">
               {project.role}
             </p>
           </article>
 
-          {/* Institution */}
           <article className="py-10 md:px-8">
             <Building2
               size={22}
@@ -274,48 +388,112 @@ export default async function ProjectPage({
           OVERVIEW
       ====================================================== */}
 
-      <section className="mx-auto grid w-[calc(100%-32px)] max-w-[1400px] gap-14 py-28 md:w-[calc(100%-64px)] md:grid-cols-[0.65fr_1.35fr] md:py-40">
+      <section
+        className="
+          mx-auto
+          grid
+          w-[calc(100%-32px)]
+          max-w-[1400px]
+          gap-14
+          py-28
+          md:w-[calc(100%-64px)]
+          md:grid-cols-[0.65fr_1.35fr]
+          md:py-40
+        "
+      >
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-black/45 md:text-sm">
+          <p
+            className="
+              text-xs
+              uppercase
+              tracking-[0.2em]
+              text-black/45
+              md:text-sm
+            "
+          >
             01 · Overview
           </p>
         </div>
 
         <div>
-          <h2 className="max-w-5xl text-[clamp(2.8rem,5.5vw,6rem)] font-medium leading-[0.95] tracking-[-0.06em]">
-            Building a thoughtful solution for a complex problem.
+          <h2
+            className="
+              max-w-5xl
+              text-[clamp(2.8rem,5.5vw,6rem)]
+              font-medium
+              leading-[0.95]
+              tracking-[-0.06em]
+            "
+          >
+            {overviewHeading}
           </h2>
 
-          <p className="mt-10 max-w-4xl text-xl leading-relaxed text-black/60 md:text-2xl">
+          <p
+            className="
+              mt-10
+              max-w-4xl
+              text-xl
+              leading-relaxed
+              text-black/60
+              md:text-2xl
+            "
+          >
             {project.overview}
           </p>
         </div>
       </section>
 
       {/* =====================================================
-          PROJECT METRICS
+          METRICS
       ====================================================== */}
 
-      <section className="mx-auto w-[calc(100%-32px)] max-w-[1600px] pb-28 md:w-[calc(100%-64px)] md:pb-40">
+      <section
+        className="
+          mx-auto
+          w-[calc(100%-32px)]
+          max-w-[1600px]
+          pb-28
+          md:w-[calc(100%-64px)]
+          md:pb-40
+        "
+      >
         <div className="grid border-t border-black/20 sm:grid-cols-2 lg:grid-cols-4">
-          {project.metrics.map((metric, index) => (
-            <article
-              key={`${metric.label}-${metric.value}`}
-              className="border-b border-black/20 py-10 sm:px-8 sm:odd:border-r lg:border-r lg:last:border-r-0"
-            >
-              <span className="text-xs text-black/35">
-                0{index + 1}
-              </span>
+          {project.metrics.map(
+            (metric, index) => (
+              <article
+                key={`${metric.label}-${metric.value}`}
+                className="
+                  border-b
+                  border-black/20
+                  py-10
+                  sm:px-8
+                  sm:odd:border-r
+                  lg:border-r
+                  lg:last:border-r-0
+                "
+              >
+                <span className="text-xs text-black/35">
+                  0{index + 1}
+                </span>
 
-              <p className="mt-16 text-[clamp(3.5rem,6vw,6.5rem)] font-medium leading-none tracking-[-0.07em]">
-                {metric.value}
-              </p>
+                <p
+                  className="
+                    mt-16
+                    text-[clamp(3.5rem,6vw,6.5rem)]
+                    font-medium
+                    leading-none
+                    tracking-[-0.07em]
+                  "
+                >
+                  {metric.value}
+                </p>
 
-              <p className="mt-5 text-sm text-black/50 md:text-base">
-                {metric.label}
-              </p>
-            </article>
-          ))}
+                <p className="mt-5 text-sm text-black/50 md:text-base">
+                  {metric.label}
+                </p>
+              </article>
+            ),
+          )}
         </div>
       </section>
 
@@ -323,25 +501,61 @@ export default async function ProjectPage({
           MAIN PROJECT IMAGE
       ====================================================== */}
 
-      <section className="mx-auto w-[calc(100%-32px)] max-w-[1600px] md:w-[calc(100%-64px)]">
+      <section
+        className="
+          mx-auto
+          w-[calc(100%-32px)]
+          max-w-[1600px]
+          md:w-[calc(100%-64px)]
+        "
+      >
         {project.heroImage ? (
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[28px] bg-black/5 md:rounded-[48px]">
+          <div
+            className="
+              relative
+              aspect-[16/10]
+              overflow-hidden
+              rounded-[28px]
+              bg-black/5
+              md:rounded-[48px]
+            "
+          >
             <Image
               src={project.heroImage}
               alt={`${project.title} project preview`}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 1600px"
-              className="object-cover transition-transform duration-1000 hover:scale-[1.02]"
+              className="object-contain transition-transform duration-1000 hover:scale-[1.015]"
             />
           </div>
         ) : (
           <div
-            className={`relative flex min-h-[65vh] items-center justify-center overflow-hidden rounded-[28px] ${project.background} md:min-h-[80vh] md:rounded-[48px]`}
+            className={`
+              relative
+              flex
+              min-h-[65vh]
+              items-center
+              justify-center
+              overflow-hidden
+              rounded-[28px]
+              ${project.background}
+              md:min-h-[80vh]
+              md:rounded-[48px]
+            `}
           >
             <div
               aria-hidden="true"
-              className="absolute text-[18rem] font-medium leading-none tracking-[-0.12em] text-black/[0.05] sm:text-[27rem] lg:text-[40rem]"
+              className="
+                absolute
+                text-[18rem]
+                font-medium
+                leading-none
+                tracking-[-0.12em]
+                text-black/[0.05]
+                sm:text-[27rem]
+                lg:text-[40rem]
+              "
             >
               {project.number}
             </div>
@@ -360,20 +574,25 @@ export default async function ProjectPage({
               <h2 className="mt-5 text-4xl font-medium tracking-[-0.05em] md:text-6xl">
                 {project.shortTitle}
               </h2>
-
-              <p className="mx-auto mt-6 max-w-xl leading-relaxed text-black/55">
-                Project screenshots and diagrams will be added here.
-              </p>
             </div>
           </div>
         )}
       </section>
 
       {/* =====================================================
-          CHALLENGE, APPROACH AND OUTCOME
+          CHALLENGE / APPROACH / OUTCOME
       ====================================================== */}
 
-      <section className="mx-auto w-[calc(100%-32px)] max-w-[1400px] py-28 md:w-[calc(100%-64px)] md:py-44">
+      <section
+        className="
+          mx-auto
+          w-[calc(100%-32px)]
+          max-w-[1400px]
+          py-28
+          md:w-[calc(100%-64px)]
+          md:py-44
+        "
+      >
         <div className="grid border-t border-black/20">
           {[
             {
@@ -394,7 +613,15 @@ export default async function ProjectPage({
           ].map((item) => (
             <article
               key={item.number}
-              className="grid gap-10 border-b border-black/20 py-16 md:grid-cols-[0.65fr_1.35fr] md:py-24"
+              className="
+                grid
+                gap-10
+                border-b
+                border-black/20
+                py-16
+                md:grid-cols-[0.65fr_1.35fr]
+                md:py-24
+              "
             >
               <div>
                 <span className="text-sm text-black/40">
@@ -415,80 +642,59 @@ export default async function ProjectPage({
       </section>
 
       {/* =====================================================
-          PROJECT GALLERY
+          GALLERY
       ====================================================== */}
 
-      {project.gallery && project.gallery.length > 0 && (
-        <section className="mx-auto w-[calc(100%-32px)] max-w-[1600px] pb-28 md:w-[calc(100%-64px)] md:pb-44">
-          <div className="mb-14">
-            <p className="text-xs uppercase tracking-[0.2em] text-black/45 md:text-sm">
-              05 · Project gallery
-            </p>
-
-            <h2 className="mt-5 text-[clamp(3rem,6vw,7rem)] font-medium leading-[0.9] tracking-[-0.065em]">
-              Inside the process.
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {project.gallery.map((galleryImage, index) => (
-              <figure
-                key={galleryImage.src}
-                className={
-                  index === 0 ? "md:col-span-2" : ""
-                }
-              >
-                <div
-                  className={`relative overflow-hidden rounded-[28px] bg-black/5 ${
-                    index === 0
-                      ? "aspect-[16/9]"
-                      : "aspect-[4/3]"
-                  }`}
-                >
-                  <Image
-                    src={galleryImage.src}
-                    alt={galleryImage.alt}
-                    fill
-                    sizes={
-                      index === 0
-                        ? "(max-width: 768px) 100vw, 1600px"
-                        : "(max-width: 768px) 100vw, 800px"
-                    }
-                    className="object-cover transition-transform duration-700 hover:scale-[1.025]"
-                  />
-                </div>
-
-                {galleryImage.caption && (
-                  <figcaption className="mt-4 max-w-3xl text-sm leading-relaxed text-black/50">
-                    {galleryImage.caption}
-                  </figcaption>
-                )}
-              </figure>
-            ))}
-          </div>
-        </section>
-      )}
+      {project.gallery &&
+        project.gallery.length > 0 && (
+          <ProjectGallery
+            images={project.gallery}
+          />
+        )}
 
       {/* =====================================================
           DEVELOPMENT PROCESS
       ====================================================== */}
 
       <section className="bg-[#111111] text-white">
-        <div className="mx-auto w-[calc(100%-32px)] max-w-[1600px] py-28 md:w-[calc(100%-64px)] md:py-40">
+        <div
+          className="
+            mx-auto
+            w-[calc(100%-32px)]
+            max-w-[1600px]
+            py-28
+            md:w-[calc(100%-64px)]
+            md:py-40
+          "
+        >
           <div className="grid gap-12 md:grid-cols-2 md:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-white/45 md:text-sm">
                 06 · Development process
               </p>
 
-              <h2 className="mt-6 max-w-4xl text-[clamp(3.5rem,7vw,8rem)] font-medium leading-[0.88] tracking-[-0.07em]">
-                From idea to implementation.
+              <h2
+                className="
+                  mt-6
+                  max-w-4xl
+                  text-[clamp(3.5rem,7vw,8rem)]
+                  font-medium
+                  leading-[0.88]
+                  tracking-[-0.07em]
+                "
+              >
+                {project.slug ===
+                "semantic-map-inference"
+                  ? "From constraints to an inferred network."
+                  : "From idea to implementation."}
               </h2>
             </div>
 
             <p className="max-w-xl text-lg leading-relaxed text-white/50 md:justify-self-end md:text-xl">
-              A structured workflow used to understand the problem,
-              design the system and develop the project.
+              {project.slug ===
+              "semantic-map-inference"
+                ? "A structured research workflow transforming linguistic connectivity constraints into interpretable semantic networks."
+                : "A structured workflow used to understand the problem, design the system and develop the project."}
             </p>
           </div>
 
@@ -496,7 +702,15 @@ export default async function ProjectPage({
             {project.process.map((step) => (
               <article
                 key={`${step.number}-${step.title}`}
-                className="min-h-[360px] border-b border-white/20 py-10 md:border-r md:p-10 md:even:border-r-0"
+                className="
+                  min-h-[360px]
+                  border-b
+                  border-white/20
+                  py-10
+                  md:border-r
+                  md:p-10
+                  md:even:border-r-0
+                "
               >
                 <div className="flex h-full flex-col justify-between">
                   <span className="text-sm text-white/35">
@@ -520,10 +734,22 @@ export default async function ProjectPage({
       </section>
 
       {/* =====================================================
-          TECHNOLOGY STACK
+          TECHNOLOGIES
       ====================================================== */}
 
-      <section className="mx-auto grid w-[calc(100%-32px)] max-w-[1400px] gap-14 py-28 md:w-[calc(100%-64px)] md:grid-cols-[0.65fr_1.35fr] md:py-40">
+      <section
+        className="
+          mx-auto
+          grid
+          w-[calc(100%-32px)]
+          max-w-[1400px]
+          gap-14
+          py-28
+          md:w-[calc(100%-64px)]
+          md:grid-cols-[0.65fr_1.35fr]
+          md:py-40
+        "
+      >
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-black/45 md:text-sm">
             07 · Technology
@@ -541,82 +767,116 @@ export default async function ProjectPage({
             Tools and technologies.
           </h2>
 
-          {/* Technology pills */}
           <div className="mt-14 flex flex-wrap gap-3">
-            {project.technologies.map((technology) => (
-              <span
-                key={technology}
-                className="rounded-full border border-black/20 px-6 py-3 text-sm transition-colors duration-300 hover:bg-black hover:text-white md:px-7 md:py-4 md:text-base"
-              >
-                {technology}
-              </span>
-            ))}
+            {project.technologies.map(
+              (technology) => (
+                <span
+                  key={technology}
+                  className="
+                    rounded-full
+                    border
+                    border-black/20
+                    px-6
+                    py-3
+                    text-sm
+                    transition-colors
+                    duration-300
+                    hover:bg-black
+                    hover:text-white
+                    md:px-7
+                    md:py-4
+                    md:text-base
+                  "
+                >
+                  {technology}
+                </span>
+              ),
+            )}
           </div>
 
-          {/* External project links */}
-          {(hasGitHubLink || hasLiveDemoLink) && (
+          {/* External links */}
+          {(hasGitHubLink ||
+            hasLiveDemoLink) && (
             <div className="mt-14 flex flex-wrap gap-4">
-              {/* =============================================
-                  GITHUB BUTTON FIX
-
-                  The text and icons are explicitly white.
-
-                  !text-white overrides any inherited global
-                  anchor colour that may otherwise turn them black.
-              ============================================== */}
-
               {hasGitHubLink && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`View ${project.title} on GitHub`}
-                  className="group inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 !text-white transition-all duration-300 hover:-translate-y-1 hover:bg-black/85"
-                >
-                  <FaGithub className="h-[19px] w-[19px] shrink-0 text-white" />
+                <MagneticButton>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="OPEN"
+                    className="
+                      group
+                      inline-flex
+                      items-center
+                      gap-3
+                      rounded-full
+                      bg-black
+                      px-7
+                      py-4
+                      !text-white
+                      transition-colors
+                      duration-300
+                      hover:bg-black/85
+                    "
+                  >
+                    <FaGithub className="h-[19px] w-[19px]" />
 
-                  <span className="text-white">
-                    View GitHub
-                  </span>
+                    <span>View GitHub</span>
 
-                  <ArrowUpRight
-                    size={17}
-                    className="shrink-0 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                  />
-                </a>
+                    <ArrowUpRight
+                      size={17}
+                      className="
+                        transition-transform
+                        duration-300
+                        group-hover:translate-x-1
+                        group-hover:-translate-y-1
+                      "
+                    />
+                  </a>
+                </MagneticButton>
               )}
 
-              {/* Live project button */}
               {hasLiveDemoLink && (
-                <a
-                  href={project.liveDemo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open the live ${project.title} project`}
-                  className="group inline-flex items-center gap-3 rounded-full border border-black/25 px-7 py-4 text-black transition-all duration-300 hover:-translate-y-1 hover:bg-black hover:!text-white"
-                >
-                  <ExternalLink
-                    size={18}
-                    className="shrink-0"
-                  />
+                <MagneticButton>
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="OPEN"
+                    className="
+                      group
+                      inline-flex
+                      items-center
+                      gap-3
+                      rounded-full
+                      border
+                      border-black/25
+                      px-7
+                      py-4
+                      transition-colors
+                      duration-300
+                      hover:bg-black
+                      hover:text-white
+                    "
+                  >
+                    <ExternalLink size={18} />
 
-                  <span>View live project</span>
+                    <span>View live project</span>
 
-                  <ArrowUpRight
-                    size={17}
-                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                  />
-                </a>
+                    <ArrowUpRight
+                      size={17}
+                      className="
+                        transition-transform
+                        duration-300
+                        group-hover:translate-x-1
+                        group-hover:-translate-y-1
+                      "
+                    />
+                  </a>
+                </MagneticButton>
               )}
             </div>
-          )}
-
-          {/* Placeholder message */}
-          {!hasGitHubLink && !hasLiveDemoLink && (
-            <p className="mt-12 max-w-xl text-sm leading-relaxed text-black/45">
-              Repository and live-project links will appear here after
-              valid URLs are added to the project data.
-            </p>
           )}
         </div>
       </section>
@@ -628,14 +888,39 @@ export default async function ProjectPage({
       <section className={nextProject.background}>
         <TransitionLink
           href={`/work/${nextProject.slug}`}
-          className="group mx-auto block w-[calc(100%-32px)] max-w-[1600px] py-28 md:w-[calc(100%-64px)] md:py-40"
+          className="
+            group
+            mx-auto
+            block
+            w-[calc(100%-32px)]
+            max-w-[1600px]
+            py-28
+            md:w-[calc(100%-64px)]
+            md:py-40
+          "
         >
           <div className="flex items-center justify-between border-b border-black/20 pb-7">
             <p className="text-xs uppercase tracking-[0.2em] text-black/50 md:text-sm">
               Next project
             </p>
 
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-black/25 transition-all duration-500 group-hover:rotate-45 group-hover:bg-black group-hover:text-white">
+            <span
+              className="
+                flex
+                h-14
+                w-14
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-black/25
+                transition-all
+                duration-500
+                group-hover:rotate-45
+                group-hover:bg-black
+                group-hover:text-white
+              "
+            >
               <ArrowUpRight size={20} />
             </span>
           </div>
@@ -656,7 +941,11 @@ export default async function ProjectPage({
 
               <ArrowRight
                 size={18}
-                className="transition-transform duration-300 group-hover:translate-x-2"
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-2
+                "
               />
             </div>
           </div>
@@ -668,17 +957,61 @@ export default async function ProjectPage({
       ====================================================== */}
 
       <footer className="bg-[#111111] text-white">
-        <div className="mx-auto flex w-[calc(100%-32px)] max-w-[1600px] flex-col justify-between gap-6 py-8 text-sm text-white/50 md:w-[calc(100%-64px)] md:flex-row">
+        <div
+          className="
+            mx-auto
+            flex
+            w-[calc(100%-32px)]
+            max-w-[1600px]
+            flex-col
+            justify-between
+            gap-6
+            py-8
+            text-sm
+            text-white/50
+            md:w-[calc(100%-64px)]
+            md:flex-row
+            md:items-center
+          "
+        >
           <p>
-            © {new Date().getFullYear()} Prathamesh Rane
+            © {new Date().getFullYear()} Prathamesh
+            Rane
           </p>
 
-          <TransitionLink
-            href="/"
-            className="transition-colors duration-300 hover:text-white"
-          >
-            Return home
-          </TransitionLink>
+          <MagneticButton>
+            <TransitionLink
+              href="/"
+              className="
+                group
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-white/20
+                px-5
+                py-3
+                !text-white
+                transition-colors
+                duration-300
+                hover:bg-white
+                hover:!text-black
+              "
+            >
+              <span>Return home</span>
+
+              <ArrowUpRight
+                size={16}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-1
+                  group-hover:-translate-y-1
+                "
+              />
+            </TransitionLink>
+          </MagneticButton>
         </div>
       </footer>
     </main>

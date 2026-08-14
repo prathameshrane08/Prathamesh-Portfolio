@@ -48,6 +48,7 @@ import { TransitionProvider } from "@/components/transitions/TransitionContext";
 // https://prathameshrane.com
 //
 // =============================================================
+
 const WEBSITE_URL =
   "https://prathamesh-portfolio-ruddy.vercel.app";
 
@@ -55,11 +56,12 @@ const WEBSITE_URL =
 // GLOBAL METADATA
 //
 // Search engines, LinkedIn, WhatsApp,
-// Discord, Slack and Twitter use this.
+// Discord, Slack and Twitter/X use this.
 //
 // This metadata automatically applies
 // to every page.
 // =============================================================
+
 export const metadata: Metadata = {
   metadataBase: new URL(WEBSITE_URL),
 
@@ -121,6 +123,19 @@ export const metadata: Metadata = {
     },
   },
 
+  // ===========================================================
+  // OPEN GRAPH
+  //
+  // Used by:
+  //
+  // LinkedIn
+  // WhatsApp
+  // Facebook
+  // Discord
+  // Slack
+  // Telegram
+  // ===========================================================
+
   openGraph: {
     title:
       "Prathamesh Rane | AI, Robotics & Software Engineering",
@@ -135,7 +150,24 @@ export const metadata: Metadata = {
     locale: "en_US",
 
     type: "website",
+
+    images: [
+      {
+        url: "/social-preview.png",
+
+        width: 1712,
+
+        height: 896,
+
+        alt:
+          "Prathamesh Rane — AI, Robotics and Software Engineering Portfolio",
+      },
+    ],
   },
+
+  // ===========================================================
+  // TWITTER / X CARD
+  // ===========================================================
 
   twitter: {
     card: "summary_large_image",
@@ -144,10 +176,16 @@ export const metadata: Metadata = {
       "Prathamesh Rane | AI, Robotics & Software Engineering",
 
     description:
-      "Portfolio showcasing Artificial Intelligence, Robotics, Machine Learning and Software Engineering.",
+      "Portfolio showcasing Artificial Intelligence, Robotics, Machine Learning, Data Visualization and Software Engineering projects.",
 
-    creator: "Prathamesh Rane",
+    images: [
+      "/opengraph-image.png",
+    ],
   },
+
+  // ===========================================================
+  // SITE ICONS
+  // ===========================================================
 
   icons: {
     icon: "/icon.png",
@@ -184,6 +222,7 @@ export const metadata: Metadata = {
 //
 // Current Page
 // =============================================================
+
 type RootLayoutProps = {
   children: React.ReactNode;
 };
@@ -207,8 +246,8 @@ export default function RootLayout({
         {/* ===================================================
             Global Transition Manager
         ==================================================== */}
-        <TransitionProvider>
 
+        <TransitionProvider>
           {/* Loader + Cursor + Scroll Progress */}
           <AppEffects />
 
@@ -217,16 +256,11 @@ export default function RootLayout({
 
           {/* Smooth scrolling */}
           <SmoothScroll>
-
             {/* Fade animation for every page */}
             <PageTransition>
-
               {children}
-
             </PageTransition>
-
           </SmoothScroll>
-
         </TransitionProvider>
       </body>
     </html>
