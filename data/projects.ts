@@ -172,7 +172,6 @@ export const projects: Project[] = [
           "Different scene configurations help evaluate robot behaviour across varied household environments.",
       },
     ],
-    github: "https://github.com/prathameshrane08",
   },
 
   {
@@ -291,7 +290,6 @@ export const projects: Project[] = [
     ],
     */
 
-    github: "https://github.com/prathameshrane08",
   },
 
   {
@@ -416,8 +414,8 @@ export const projects: Project[] = [
       },
     ],
 
-    github: "https://github.com/prathameshrane08",
-    liveDemo: "https://github.com/prathameshrane08",
+    github: "https://github.com/prathameshrane08/cutato-web",
+    liveDemo: "https://cutato-web.vercel.app",
   },
 
   {
@@ -540,7 +538,6 @@ export const projects: Project[] = [
       },
     ],
 
-    github: "https://github.com/prathameshrane08",
   },
 ];
 

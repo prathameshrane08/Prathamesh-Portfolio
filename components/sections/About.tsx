@@ -2,10 +2,12 @@
 
 import { motion } from "motion/react";
 
+import { projects } from "@/data/projects";
+
 const statistics = [
   {
-    value: "5+",
-    label: "Technical projects",
+    value: String(projects.length),
+    label: "Featured projects",
   },
   {
     value: "4",
