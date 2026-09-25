@@ -8,7 +8,7 @@ const capabilities = [
     number: "01",
     title: "Research",
     content:
-      "Building intelligent systems through robotics, explainable AI, semantic networks and data storytelling.",
+      "Building intelligent systems through robotics, explainable AI and semantic network analysis.",
   },
   {
     number: "02",

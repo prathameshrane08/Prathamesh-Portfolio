@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 
 import { useTransition } from "@/components/transitions/TransitionContext";
+import Logo from "@/components/ui/Logo";
 
 // ============================================================
 // TransitionOverlay.tsx
@@ -61,8 +62,8 @@ export default function TransitionOverlay() {
             }}
             className="text-center"
           >
-            <p className="text-5xl font-medium tracking-[-0.07em] md:text-7xl">
-              PR<span className="text-[#ff4d2e]">.</span>
+            <p className="text-5xl md:text-7xl">
+              <Logo />
             </p>
 
             <p className="mt-5 text-xs uppercase tracking-[0.25em] text-white/45">

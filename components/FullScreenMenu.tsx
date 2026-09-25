@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, X } from "lucide-react";
 
 import TransitionLink from "@/components/transitions/TransitionLink";
+import Logo from "@/components/ui/Logo";
 import { siteConfig } from "@/data/site";
 import { useScrollLock } from "@/hooks/useScrollLock";
 
@@ -108,10 +109,10 @@ export default function FullScreenMenu({
               <TransitionLink
                 href="/"
                 onClick={onClose}
-                className="text-xl font-semibold tracking-[-0.06em]"
+                className="text-[1.75rem] md:text-[2rem]"
                 aria-label="Prathamesh Rane homepage"
               >
-                PR<span className="text-white">.</span>
+                <Logo dotClassName="bg-white" />
               </TransitionLink>
 
               <button
