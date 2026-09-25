@@ -175,126 +175,8 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "banking-ai-dashboard",
-    number: "02",
-    title: "AI-Powered Banking Dashboard",
-    shortTitle: "Banking AI",
-    category: "GENERATIVE AI · DATA STORYTELLING",
-
-    description:
-      "An ongoing personal-finance project exploring how AI-generated narratives can turn transaction data into understandable stories and actionable insights.",
-
-    year: "2026",
-    duration: "Ongoing",
-    role: "Product Designer and Developer",
-    institution: "Independent Project",
-
-    background: "bg-[#ff7557]",
-
-    overviewHeading: "Turning financial data into understandable stories.",
-
-    overview:
-      "This ongoing project explores an AI-powered data-storytelling experience for personal finance. Instead of requiring users to interpret charts independently, the dashboard is designed to combine visual exploration with concise natural-language explanations of their spending behaviour.",
-
-    challenge:
-      "Traditional banking dashboards provide balances, charts and transaction histories, but users still have to determine what changed, what caused the change and whether it requires attention.",
-
-    approach:
-      "I designed the concept around three storytelling questions: what changed, why did it change and what could the user do next. The proposed workflow combines transaction categorisation, period comparisons, interactive visualisations and AI-generated explanations.",
-
-    outcome:
-      "The current concept establishes the dashboard structure, storytelling framework and interaction flow. Development is ongoing, with the next stage focused on implementing the data pipeline and AI-generated narrative layer.",
-
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Python",
-      "Large Language Models",
-      "Data Visualisation",
-      "PostgreSQL",
-    ],
-
-    metrics: [
-      {
-        value: "3",
-        label: "Story layers",
-      },
-      {
-        value: "3",
-        label: "Exploration levels",
-      },
-      {
-        value: "AI",
-        label: "Narrative layer",
-      },
-      {
-        value: "WIP",
-        label: "Project status",
-      },
-    ],
-
-    process: [
-      {
-        number: "01",
-        title: "Problem discovery",
-        description:
-          "Identified the gap between displaying financial data and helping users understand what their spending patterns actually mean.",
-      },
-      {
-        number: "02",
-        title: "Story framework",
-        description:
-          "Structured each financial narrative around three questions: what changed, why did it change and what could the user do next.",
-      },
-      {
-        number: "03",
-        title: "Exploration design",
-        description:
-          "Designed a drill-down experience from monthly spending patterns to categories, weekly behaviour and individual transactions.",
-      },
-      {
-        number: "04",
-        title: "AI narrative layer",
-        description:
-          "Designed the architecture for connecting structured financial data with personalised natural-language explanations and actionable insights.",
-      },
-    ],
-
-    cardImage: "/projects/banking/card.png",
-    heroImage: "/projects/banking/card.png",
-
-    /*
-    Gallery will be enabled once the dashboard
-    prototype visuals are ready.
-
-    gallery: [
-      {
-        src: "/projects/banking/spending-story.png",
-        alt: "AI-powered personal finance spending story",
-        caption:
-          "A narrative layer designed to explain significant changes in a user's spending behaviour.",
-      },
-      {
-        src: "/projects/banking/category-view.png",
-        alt: "Interactive spending category exploration",
-        caption:
-          "A drill-down interface for exploring spending by category, time period and transaction.",
-      },
-      {
-        src: "/projects/banking/insights.png",
-        alt: "Personalised financial insight concept",
-        caption:
-          "A concept for turning detected financial patterns into understandable and actionable recommendations.",
-      },
-    ],
-    */
-
-  },
-
-  {
     slug: "cutato-booking-platform",
-    number: "03",
+    number: "02",
     title: "Cutato Booking Platform",
     shortTitle: "Cutato",
     category: "Full-Stack Development · Conversational AI",
@@ -420,7 +302,7 @@ export const projects: Project[] = [
 
   {
     slug: "semantic-map-inference",
-    number: "04",
+    number: "03",
     title: "Semantic Map Network Inference",
     shortTitle: "Semantic Maps",
     category: "Graph Algorithms · Computational Linguistics",
