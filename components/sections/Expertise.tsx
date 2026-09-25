@@ -30,7 +30,7 @@ const expertise = [
   {
     title: "Data Systems",
     description:
-      "Data engineering, interactive visualization, semantic networks and AI-powered storytelling.",
+      "Data engineering, interactive visualization and semantic network analysis.",
     icon: Database,
   },
 ];

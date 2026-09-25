@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import TransitionLink from "@/components/transitions/TransitionLink";
+import Logo from "@/components/ui/Logo";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 type HeaderProps = {
@@ -37,10 +38,10 @@ export default function Header({
       ====================================================== */}
       <TransitionLink
         href="/"
-        className="text-xl font-semibold tracking-[-0.06em]"
+        className="text-[1.75rem] md:text-[2rem]"
         aria-label="Prathamesh Rane homepage"
       >
-        PR<span className="text-[#ff4d2e]">.</span>
+        <Logo />
       </TransitionLink>
 
       {/* =====================================================

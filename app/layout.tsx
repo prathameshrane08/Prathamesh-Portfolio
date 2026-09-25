@@ -45,7 +45,6 @@ export const metadata: Metadata = {
     "Computational Modeling",
     "Software Engineering",
     "Data Visualization",
-    "Data Storytelling",
     "Python",
     "C++",
     "TypeScript",
@@ -138,18 +137,6 @@ export const metadata: Metadata = {
     images: [
       "/social-preview.png",
     ],
-  },
-
-  // ===========================================================
-  // SITE ICONS
-  // ===========================================================
-
-  icons: {
-    icon: "/icon.png",
-
-    shortcut: "/icon.png",
-
-    apple: "/icon.png",
   },
 
   category: "technology",

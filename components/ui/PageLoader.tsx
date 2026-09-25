@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import Logo from "@/components/ui/Logo";
+
 export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,9 +43,9 @@ export default function PageLoader() {
               transition={{
                 duration: 0.5,
               }}
-              className="text-5xl font-medium tracking-[-0.07em] md:text-7xl"
+              className="text-5xl md:text-7xl"
             >
-              PR<span className="text-[#ff4d2e]">.</span>
+              <Logo />
             </motion.p>
 
             <motion.div
