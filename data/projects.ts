@@ -421,6 +421,188 @@ export const projects: Project[] = [
     ],
 
   },
+
+  {
+    slug: "llm-bias-explainability",
+    number: "04",
+    title: "Bias, Harm and False Refusals in LLMs",
+    shortTitle: "LLM Bias",
+    category: "Explainable AI · Large Language Models",
+    description:
+      "An explainability study of how Falcon-7B-Instruct responds to demographic prompt variations and benign prompts it may wrongly refuse.",
+
+    year: "2025",
+    duration: "One semester",
+    role: "Model experiments and analysis (team project)",
+    institution: "TU Dresden · Advanced AI course",
+
+    background: "bg-[#ff7557]",
+
+    overviewHeading: "Looking inside a language model's decisions.",
+
+    overview:
+      "This team project for the Advanced AI course investigated when a large language model produces biased, harmful or overly cautious responses, and used explainability methods to understand why. The experiments focused on Falcon-7B-Instruct, examining its behaviour across demographic prompt variations and on benign prompts that can be mistaken for unsafe ones.",
+
+    challenge:
+      "Language models can respond differently when only a demographic detail in a prompt changes, and safety tuning can cause them to refuse harmless requests. Observing these behaviours is not enough: the goal was to connect them to what happens inside the model when it processes a prompt.",
+
+    approach:
+      "I ran the Falcon-7B-Instruct experiments using PyTorch and Hugging Face Transformers. We built prompt variations that changed demographic descriptors, used XSTest examples to evaluate false refusals, and analysed token-level attention to see how the model processed different parts of each prompt. Post-hoc explanation methods such as LIME and SHAP complemented the attention analysis, and reflection-based prompting was explored as a mitigation technique.",
+
+    outcome:
+      "Changing demographic descriptors could produce differences in both the model's attention patterns and its behaviour. The project combined bias and toxicity analysis with false-refusal evaluation, showing how benign prompts can be treated as unsafe and how explainability methods help trace these behaviours back to the input.",
+
+    technologies: [
+      "Python",
+      "PyTorch",
+      "Hugging Face Transformers",
+      "Falcon-7B-Instruct",
+      "XSTest",
+      "LIME",
+      "SHAP",
+      "Attention Analysis",
+    ],
+
+    metrics: [
+      {
+        value: "7B",
+        label: "Model parameters",
+      },
+      {
+        value: "XSTest",
+        label: "False-refusal evaluation",
+      },
+      {
+        value: "3",
+        label: "Explanation methods",
+      },
+      {
+        value: "Token",
+        label: "Attention analysis level",
+      },
+    ],
+
+    process: [
+      {
+        number: "01",
+        title: "Model setup",
+        description:
+          "Ran Falcon-7B-Instruct with PyTorch and Hugging Face Transformers so that both generated outputs and internal attention could be inspected.",
+      },
+      {
+        number: "02",
+        title: "Prompt design",
+        description:
+          "Created prompt variations that changed demographic attributes, and selected XSTest examples to probe false refusals on benign requests.",
+      },
+      {
+        number: "03",
+        title: "Behaviour analysis",
+        description:
+          "Compared the model's responses across prompt variations to identify biased, toxic or overly cautious behaviour.",
+      },
+      {
+        number: "04",
+        title: "Explainability",
+        description:
+          "Analysed token-level attention and applied LIME and SHAP to relate the observed behaviour to specific parts of each prompt.",
+      },
+    ],
+
+    processHeading: "From prompts to explanations.",
+    processIntro:
+      "A structured workflow for probing model behaviour and tracing it back to how the model processes its input.",
+  },
+
+  {
+    slug: "agrosahayak",
+    number: "05",
+    title: "AgroSahayak Agricultural Assistant",
+    shortTitle: "AgroSahayak",
+    category: "Machine Learning · Computer Vision · Agriculture",
+    description:
+      "A machine-learning web platform that recommends crops and fertilizers from soil and weather data and detects plant diseases from leaf images.",
+
+    year: "2024",
+    duration: "One semester",
+    role: "Bachelor's thesis project",
+    institution: "University of Mumbai",
+
+    background: "bg-[#ffd166]",
+
+    overviewHeading: "Bringing machine learning to everyday farming decisions.",
+
+    overview:
+      "AgroSahayak was a Bachelor's thesis project in the final semester of the B.E. in Information Technology at the University of Mumbai. It applies machine learning to three practical agricultural questions: which crop suits a field, how its soil nutrients should be corrected, and whether a plant shows signs of disease.",
+
+    challenge:
+      "Crop and fertilizer choices depend on several interacting factors, including soil nutrients, acidity, rainfall and local weather, and plant diseases are difficult to identify without expert knowledge. The challenge was to turn these inputs into clear recommendations through a simple web interface.",
+
+    approach:
+      "The platform is a Flask web application with three tools. Crop recommendation combines soil nitrogen, phosphorus, potassium, pH and rainfall with live temperature and humidity from the OpenWeatherMap API; six classifiers were compared and a Random Forest model is used in the app. Fertilizer suggestions compare the entered soil nutrients with each crop's requirements, and disease detection classifies uploaded leaf images with a ResNet9 convolutional network.",
+
+    outcome:
+      "The Random Forest model reached 99.1% accuracy on the held-out test set across 22 crops, and the disease model recognises 38 plant disease and healthy-leaf classes. Together the tools form a single assistant for crop planning, soil management and plant health.",
+
+    technologies: [
+      "Python",
+      "Flask",
+      "scikit-learn",
+      "XGBoost",
+      "PyTorch",
+      "Pandas",
+      "OpenWeatherMap API",
+      "Jupyter",
+    ],
+
+    metrics: [
+      {
+        value: "99.1%",
+        label: "Crop model test accuracy",
+      },
+      {
+        value: "22",
+        label: "Crops covered",
+      },
+      {
+        value: "38",
+        label: "Leaf disease classes",
+      },
+      {
+        value: "6",
+        label: "Classifiers compared",
+      },
+    ],
+
+    process: [
+      {
+        number: "01",
+        title: "Data preparation",
+        description:
+          "Merged and cleaned crop, fertilizer and yield datasets into a crop-recommendation dataset of soil and climate features.",
+      },
+      {
+        number: "02",
+        title: "Model comparison",
+        description:
+          "Trained and compared Decision Tree, Naive Bayes, SVM, Logistic Regression, Random Forest and XGBoost classifiers for crop recommendation.",
+      },
+      {
+        number: "03",
+        title: "Disease detection",
+        description:
+          "Integrated a ResNet9 image classifier that identifies plant diseases from uploaded leaf photos.",
+      },
+      {
+        number: "04",
+        title: "Web application",
+        description:
+          "Combined crop, fertilizer and disease tools in a Flask application that fetches live weather data for the user's city.",
+      },
+    ],
+
+    github: "https://github.com/prathameshrane08/AgroSahayak",
+  },
 ];
 
 export function getProjectBySlug(slug: string) {
