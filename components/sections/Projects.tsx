@@ -147,445 +147,461 @@ export default function Projects() {
           xl:gap-8
         "
       >
-        {projects.map((project, index) => (
-          <motion.article
-            key={project.slug}
-            initial={{
-              opacity: 0,
-              y: 70,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.1,
-            }}
-            transition={{
-              duration: 0.8,
-              delay: index * 0.07,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {/* =================================================
-                PROJECT CARD
-            ================================================== */}
+        {projects.map((project, index) => {
+          // With an odd number of projects, the last card spans
+          // both columns so the grid doesn't end with a gap.
+          const isWide =
+            projects.length % 2 === 1 &&
+            index === projects.length - 1;
 
-            <TransitionLink
-              href={`/work/${project.slug}`}
-              data-cursor="VIEW"
-              className={`
-                group
-                relative
-                block
-                overflow-hidden
-
-                rounded-[28px]
-
-                ${project.background}
-
-                transition-all
-                duration-700
-                ease-[cubic-bezier(.22,1,.36,1)]
-
-                hover:-translate-y-2
-                hover:shadow-[0_30px_60px_rgba(0,0,0,0.16)]
-
-                md:rounded-[32px]
-              `}
+          return (
+            <motion.article
+              key={project.slug}
+              className={isWide ? "lg:col-span-2" : undefined}
+              initial={{
+                opacity: 0,
+                y: 70,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.1,
+              }}
+              transition={{
+                duration: 0.8,
+                delay: index * 0.07,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               {/* =================================================
-                  PROJECT IMAGE
+                  PROJECT CARD
               ================================================== */}
 
-              {project.cardImage && (
-                <div
-                  className="
-                    relative
-
-                    mx-4
-                    mt-4
-
-                    aspect-[4/3]
-
-                    overflow-hidden
-                    rounded-[22px]
-                    bg-black/5
-
-                    sm:aspect-[16/10]
-
-                    md:mx-5
-                    md:mt-5
-                    md:aspect-[16/9]
-                    md:rounded-[24px]
-
-                    lg:aspect-[16/10]
-
-                    xl:aspect-[16/9]
-                  "
-                >
-                  <Image
-                    src={project.cardImage}
-                    alt={`${project.title} preview`}
-                    fill
-                    sizes="
-                      (max-width: 1023px) 100vw,
-                      50vw
-                    "
-                    className="
-                      object-cover
-
-                      transition-transform
-                      duration-[1400ms]
-                      ease-out
-
-                      group-hover:scale-[1.05]
-                    "
-                  />
-
-                  {/* Subtle image hover overlay */}
-                  <div
-                    aria-hidden="true"
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-0
-
-                      bg-gradient-to-t
-                      from-black/30
-                      via-black/5
-                      to-transparent
-
-                      opacity-0
-
-                      transition-opacity
-                      duration-700
-
-                      group-hover:opacity-100
-                    "
-                  />
-                </div>
-              )}
-
-              {/* =================================================
-                  FALLBACK IMAGE AREA
-              ================================================== */}
-
-              {!project.cardImage && (
-                <div
-                  className="
-                    relative
-
-                    mx-4
-                    mt-4
-
-                    aspect-[4/3]
-
-                    overflow-hidden
-                    rounded-[22px]
-
-                    bg-black/[0.04]
-
-                    sm:aspect-[16/10]
-
-                    md:mx-5
-                    md:mt-5
-                    md:aspect-[16/9]
-                    md:rounded-[24px]
-                  "
-                >
-                  <span
-                    aria-hidden="true"
-                    className="
-                      absolute
-                      right-2
-                      top-2
-
-                      text-[9rem]
-                      font-medium
-                      leading-none
-                      tracking-[-0.1em]
-
-                      text-black/[0.05]
-
-                      sm:text-[12rem]
-                      md:text-[15rem]
-                    "
-                  >
-                    {project.number}
-                  </span>
-                </div>
-              )}
-
-              {/* =================================================
-                  PROJECT NUMBER + ARROW
-              ================================================== */}
-
-              <div
-                className="
-                  absolute
-
-                  left-7
-                  right-7
-                  top-7
-
-                  z-20
-
-                  flex
-                  items-start
-                  justify-between
-
-                  md:left-8
-                  md:right-8
-                  md:top-8
-                "
-              >
-                {/* Project number */}
-                <span
-                  className="
-                    rounded-full
-
-                    bg-white/90
-
-                    px-4
-                    py-2
-
-                    text-sm
-
-                    backdrop-blur-md
-
-                    shadow-sm
-                  "
-                >
-                  {project.number}
-                </span>
-
-                {/* Arrow */}
-                <span
-                  className="
-                    flex
-
-                    h-12
-                    w-12
-
-                    items-center
-                    justify-center
-
-                    rounded-full
-
-                    border
-                    border-black/25
-
-                    bg-white/90
-
-                    backdrop-blur-md
-
-                    transition-all
-                    duration-500
-
-                    group-hover:rotate-45
-                    group-hover:scale-105
-                    group-hover:bg-black
-                    group-hover:text-white
-
-                    md:h-14
-                    md:w-14
-                  "
-                >
-                  <ArrowUpRight
-                    size={20}
-                    strokeWidth={1.7}
-                  />
-                </span>
-              </div>
-
-              {/* =================================================
-                  PROJECT CONTENT
-
-                  Normal flow at every breakpoint.
-              ================================================== */}
-
-              <div
-                className="
+              <TransitionLink
+                href={`/work/${project.slug}`}
+                data-cursor="VIEW"
+                className={`
+                  group
                   relative
-                  z-20
+                  flex
+                  h-full
+                  flex-col
+                  overflow-hidden
 
-                  px-6
-                  pb-7
-                  pt-8
+                  rounded-[28px]
 
-                  sm:px-7
-                  sm:pb-8
+                  ${project.background}
 
-                  md:px-8
-                  md:pb-9
-                  md:pt-10
+                  transition-all
+                  duration-700
+                  ease-[cubic-bezier(.22,1,.36,1)]
 
-                  xl:px-9
-                  xl:pb-10
-                "
+                  hover:-translate-y-2
+                  hover:shadow-[0_30px_60px_rgba(0,0,0,0.16)]
+
+                  md:rounded-[32px]
+                `}
               >
-                {/* Category */}
-                <p
-                  className="
-                    mb-4
+                {/* =================================================
+                    PROJECT IMAGE
+                ================================================== */}
 
-                    max-w-full
+                {project.cardImage && (
+                  <div
+                    className={`
+                      relative
 
-                    text-[11px]
-                    uppercase
-                    leading-[1.6]
-                    tracking-[0.18em]
+                      mx-4
+                      mt-4
 
-                    text-black/55
+                      aspect-[4/3]
 
-                    transition-colors
-                    duration-500
+                      overflow-hidden
+                      rounded-[22px]
+                      bg-black/5
 
-                    group-hover:text-black/75
+                      sm:aspect-[16/10]
 
-                    sm:text-xs
-                    md:text-sm
-                  "
-                >
-                  {project.category}
-                </p>
+                      md:mx-5
+                      md:mt-5
+                      md:aspect-[16/9]
+                      md:rounded-[24px]
 
-                {/* Title */}
-                <h3
-                  className="
-                    max-w-3xl
+                      ${isWide ? "lg:aspect-[21/9]" : "lg:aspect-[16/10] xl:aspect-[16/9]"}
+                    `}
+                  >
+                    <Image
+                      src={project.cardImage}
+                      alt={`${project.title} preview`}
+                      fill
+                      sizes={
+                        isWide
+                          ? "100vw"
+                          : "(max-width: 1023px) 100vw, 50vw"
+                      }
+                      className="
+                        object-cover
 
-                    text-[clamp(2.35rem,10vw,3.8rem)]
+                        transition-transform
+                        duration-[1400ms]
+                        ease-out
 
-                    font-medium
+                        group-hover:scale-[1.05]
+                      "
+                    />
 
-                    leading-[0.94]
-                    tracking-[-0.06em]
+                    {/* Subtle image hover overlay */}
+                    <div
+                      aria-hidden="true"
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
 
-                    transition-transform
-                    duration-700
+                        bg-gradient-to-t
+                        from-black/30
+                        via-black/5
+                        to-transparent
 
-                    group-hover:-translate-y-1
+                        opacity-0
 
-                    md:text-[clamp(3rem,6vw,5.2rem)]
+                        transition-opacity
+                        duration-700
 
-                    lg:text-[clamp(2.8rem,4vw,4.5rem)]
-                  "
-                >
-                  {project.title}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="
-                    mt-5
-
-                    max-w-3xl
-
-                    text-base
-                    leading-[1.65]
-
-                    text-black/60
-
-                    transition-colors
-                    duration-500
-
-                    group-hover:text-black/85
-
-                    md:mt-6
-                    md:text-lg
-                  "
-                >
-                  {project.description}
-                </p>
+                        group-hover:opacity-100
+                      "
+                    />
+                  </div>
+                )}
 
                 {/* =================================================
-                    CARD FOOTER
+                    FALLBACK IMAGE AREA
+                ================================================== */}
+
+                {!project.cardImage && (
+                  <div
+                    className={`
+                      relative
+
+                      mx-4
+                      mt-4
+
+                      aspect-[4/3]
+
+                      overflow-hidden
+                      rounded-[22px]
+
+                      bg-black/[0.04]
+
+                      sm:aspect-[16/10]
+
+                      md:mx-5
+                      md:mt-5
+                      md:aspect-[16/9]
+                      md:rounded-[24px]
+
+                      ${isWide ? "lg:aspect-[4/1]" : ""}
+                    `}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="
+                        absolute
+                        right-2
+                        top-2
+
+                        text-[9rem]
+                        font-medium
+                        leading-none
+                        tracking-[-0.1em]
+
+                        text-black/[0.05]
+
+                        sm:text-[12rem]
+                        md:text-[15rem]
+                      "
+                    >
+                      {project.number}
+                    </span>
+                  </div>
+                )}
+
+                {/* =================================================
+                    PROJECT NUMBER + ARROW
                 ================================================== */}
 
                 <div
                   className="
-                    mt-7
+                    absolute
+
+                    left-7
+                    right-7
+                    top-7
+
+                    z-20
 
                     flex
-                    items-center
+                    items-start
                     justify-between
 
-                    gap-5
-
-                    border-t
-                    border-black/20
-
-                    pt-5
-
-                    md:mt-9
+                    md:left-8
+                    md:right-8
+                    md:top-8
                   "
                 >
+                  {/* Project number */}
+                  <span
+                    className="
+                      rounded-full
+
+                      bg-white/90
+
+                      px-4
+                      py-2
+
+                      text-sm
+
+                      backdrop-blur-md
+
+                      shadow-sm
+                    "
+                  >
+                    {project.number}
+                  </span>
+
+                  {/* Arrow */}
                   <span
                     className="
                       flex
-                      items-center
-                      gap-2
 
-                      text-sm
+                      h-12
+                      w-12
+
+                      items-center
+                      justify-center
+
+                      rounded-full
+
+                      border
+                      border-black/25
+
+                      bg-white/90
+
+                      backdrop-blur-md
+
+                      transition-all
+                      duration-500
+
+                      group-hover:rotate-45
+                      group-hover:scale-105
+                      group-hover:bg-black
+                      group-hover:text-white
+
+                      md:h-14
+                      md:w-14
                     "
                   >
-                    View case study
-
                     <ArrowUpRight
-                      size={15}
-                      className="
-                        transition-transform
-                        duration-500
-
-                        group-hover:translate-x-1
-                        group-hover:-translate-y-1
-                      "
+                      size={20}
+                      strokeWidth={1.7}
                     />
                   </span>
+                </div>
 
-                  <span
+                {/* =================================================
+                    PROJECT CONTENT
+
+                    Normal flow at every breakpoint.
+                ================================================== */}
+
+                <div
+                  className="
+                    relative
+                    z-20
+
+                    flex
+                    flex-1
+                    flex-col
+
+                    px-6
+                    pb-7
+                    pt-8
+
+                    sm:px-7
+                    sm:pb-8
+
+                    md:px-8
+                    md:pb-9
+                    md:pt-10
+
+                    xl:px-9
+                    xl:pb-10
+                  "
+                >
+                  {/* Category */}
+                  <p
                     className="
-                      shrink-0
-                      text-sm
-                      text-black/45
+                      mb-4
+
+                      max-w-full
+
+                      text-[11px]
+                      uppercase
+                      leading-[1.6]
+                      tracking-[0.18em]
+
+                      text-black/55
+
+                      transition-colors
+                      duration-500
+
+                      group-hover:text-black/75
+
+                      sm:text-xs
+                      md:text-sm
                     "
                   >
-                    {project.year}
-                  </span>
+                    {project.category}
+                  </p>
+
+                  {/* Title */}
+                  <h3
+                    className="
+                      max-w-3xl
+
+                      text-[clamp(2.35rem,10vw,3.8rem)]
+
+                      font-medium
+
+                      leading-[0.94]
+                      tracking-[-0.06em]
+
+                      transition-transform
+                      duration-700
+
+                      group-hover:-translate-y-1
+
+                      md:text-[clamp(3rem,6vw,5.2rem)]
+
+                      lg:text-[clamp(2.8rem,4vw,4.5rem)]
+                    "
+                  >
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    className="
+                      mb-7
+                      mt-5
+
+                      max-w-3xl
+
+                      text-base
+                      leading-[1.65]
+
+                      text-black/60
+
+                      transition-colors
+                      duration-500
+
+                      group-hover:text-black/85
+
+                      md:mb-9
+                      md:mt-6
+                      md:text-lg
+                    "
+                  >
+                    {project.description}
+                  </p>
+
+                  {/* =================================================
+                      CARD FOOTER
+                  ================================================== */}
+
+                  <div
+                    className="
+                      mt-auto
+
+                      flex
+                      items-center
+                      justify-between
+
+                      gap-5
+
+                      border-t
+                      border-black/20
+
+                      pt-5
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        items-center
+                        gap-2
+
+                        text-sm
+                      "
+                    >
+                      View case study
+
+                      <ArrowUpRight
+                        size={15}
+                        className="
+                          transition-transform
+                          duration-500
+
+                          group-hover:translate-x-1
+                          group-hover:-translate-y-1
+                        "
+                      />
+                    </span>
+
+                    <span
+                      className="
+                        shrink-0
+                        text-sm
+                        text-black/45
+                      "
+                    >
+                      {project.year}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              {/* =================================================
-                  SUBTLE BORDER
-              ================================================== */}
+                {/* =================================================
+                    SUBTLE BORDER
+                ================================================== */}
 
-              <div
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
+                <div
+                  aria-hidden="true"
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-0
 
-                  rounded-[28px]
+                    rounded-[28px]
 
-                  ring-1
-                  ring-inset
-                  ring-black/0
+                    ring-1
+                    ring-inset
+                    ring-black/0
 
-                  transition-all
-                  duration-700
+                    transition-all
+                    duration-700
 
-                  group-hover:ring-black/10
+                    group-hover:ring-black/10
 
-                  md:rounded-[32px]
-                "
-              />
-            </TransitionLink>
-          </motion.article>
-        ))}
+                    md:rounded-[32px]
+                  "
+                />
+              </TransitionLink>
+            </motion.article>
+          );
+        })}
       </div>
     </section>
   );
