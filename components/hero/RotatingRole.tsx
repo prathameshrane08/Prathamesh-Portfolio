@@ -13,8 +13,6 @@ import { useEffect, useState } from "react";
 // Only the role changes.
 // The surrounding hero sentence stays stable.
 //
-// This creates a cleaner, more premium animation.
-//
 // Example:
 //
 // Exploring Artificial Intelligence
@@ -35,17 +33,13 @@ export default function RotatingRole() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // Change the role every 3.2 seconds.
-    //
-    // This is intentionally slower than before,
-    // so visitors have enough time to read each role.
+    // Slow enough for visitors to read each role.
     const interval = window.setInterval(() => {
       setIndex((currentIndex) => {
         return (currentIndex + 1) % roles.length;
       });
     }, 3200);
 
-    // Clean up the timer when the component is removed.
     return () => {
       window.clearInterval(interval);
     };

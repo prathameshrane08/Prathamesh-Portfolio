@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useLenis } from "lenis/react";
 
 import {
   ArrowDownRight,
@@ -29,27 +30,18 @@ import { siteConfig } from "@/data/site";
 // ✓ Email link
 // ✓ Back-to-top navigation
 // ✓ Copyright footer
-//
-// IMPORTANT
-// ---------
-// We intentionally DO NOT use min-h-screen here.
-//
-// Earlier, a large minimum height caused unnecessary
-// blank space below the footer.
 // ============================================================
 
 export default function Contact() {
-  // ==========================================================
-  // BACK TO TOP
-  //
-  // Scrolls smoothly back to the beginning of the page.
-  // ==========================================================
+  const lenis = useLenis();
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (lenis) {
+      lenis.scrollTo(0);
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -139,7 +131,6 @@ export default function Contact() {
           ease: [0.22, 1, 0.36, 1],
         }}
 
-        // Reduced from py-28 to avoid excessive empty space.
         className="py-20 md:py-28"
       >
         <h2
@@ -371,9 +362,6 @@ export default function Contact() {
 
       {/* =====================================================
           COPYRIGHT ROW
-
-          This was missing from the previous Contact component,
-          which is why no copyright appeared on the homepage.
       ====================================================== */}
 
       <div

@@ -3,14 +3,7 @@
 :root {
   --background: #f1efe9;
   --foreground: #111111;
-  --surface: #e7e4dc;
-  --muted: #6f6d67;
   --accent: #ff4d2e;
-  --line: rgba(17, 17, 17, 0.2);
-
-  --page-padding-mobile: 16px;
-  --page-padding-desktop: 32px;
-  --page-max-width: 1600px;
 }
 
 * {
@@ -26,7 +19,6 @@ body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -54,20 +46,7 @@ video {
 
 ::selection {
   background: var(--foreground);
-  color: var(--background);
-}
-
-.page-shell {
-  width: calc(100% - (var(--page-padding-mobile) * 2));
-  max-width: var(--page-max-width);
-  margin-inline: auto;
-}
-
-.eyebrow {
-  font-size: 0.75rem;
-  line-height: 1;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  color: #ffffff;
 }
 
 .display-xl {
@@ -75,37 +54,6 @@ video {
   font-weight: 500;
   line-height: 0.84;
   letter-spacing: -0.075em;
-}
-
-.display-lg {
-  font-size: clamp(3rem, 6.5vw, 7rem);
-  font-weight: 500;
-  line-height: 0.9;
-  letter-spacing: -0.065em;
-}
-
-.body-lead {
-  font-size: clamp(1.25rem, 2vw, 2rem);
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-}
-
-.muted-text {
-  color: var(--muted);
-}
-
-.section-divider {
-  border-top: 1px solid var(--line);
-}
-
-@media (min-width: 768px) {
-  .page-shell {
-    width: calc(100% - (var(--page-padding-desktop) * 2));
-  }
-
-  .eyebrow {
-    font-size: 0.875rem;
-  }
 }
 
 html.lenis,
@@ -132,10 +80,4 @@ html.lenis body {
   button {
     cursor: none;
   }
-}
-
-/* Better text selection */
-::selection {
-  background: #111111;
-  color: #ffffff;
 }

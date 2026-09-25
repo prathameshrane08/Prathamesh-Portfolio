@@ -1,6 +1,9 @@
 export const siteConfig = {
   name: "Prathamesh Rane",
 
+  // Update this if you connect a custom domain.
+  url: "https://prathamesh-portfolio-ruddy.vercel.app",
+
   email: "prathamesh.r2018@gmail.com",
 
   location: "Dresden, Germany",

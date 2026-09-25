@@ -26,6 +26,7 @@ import {
   getProjectBySlug,
   projects,
 } from "@/data/projects";
+import { siteConfig } from "@/data/site";
 
 // ============================================================
 // PROJECT PAGE PROPS
@@ -102,24 +103,6 @@ export default async function ProjectPage({
   const hasLiveDemoLink = isValidProjectLink(
     project.liveDemo,
   );
-
-  // ==========================================================
-  // PROJECT-SPECIFIC OVERVIEW HEADINGS
-  //
-  // This prevents every project from using the same generic
-  // heading.
-  // ==========================================================
-
-  const overviewHeading =
-    project.slug === "semantic-map-inference"
-      ? "Inferring semantic structure from linguistic data."
-      : project.slug === "cutato-booking-platform"
-        ? "Designing an intelligent booking experience."
-        : project.slug === "robocasa-robot-learning"
-          ? "Building a robot-learning pipeline for household manipulation."
-          : project.slug === "banking-ai-dashboard"
-            ? "Turning financial data into understandable stories."
-            : "Building a thoughtful solution for a complex problem.";
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f1efe9] text-[#111111]">
@@ -425,7 +408,7 @@ export default async function ProjectPage({
               tracking-[-0.06em]
             "
           >
-            {overviewHeading}
+            {project.overviewHeading}
           </h2>
 
           <p
@@ -683,18 +666,14 @@ export default async function ProjectPage({
                   tracking-[-0.07em]
                 "
               >
-                {project.slug ===
-                "semantic-map-inference"
-                  ? "From constraints to an inferred network."
-                  : "From idea to implementation."}
+                {project.processHeading ??
+                  "From idea to implementation."}
               </h2>
             </div>
 
             <p className="max-w-xl text-lg leading-relaxed text-white/50 md:justify-self-end md:text-xl">
-              {project.slug ===
-              "semantic-map-inference"
-                ? "A structured research workflow transforming linguistic connectivity constraints into interpretable semantic networks."
-                : "A structured workflow used to understand the problem, design the system and develop the project."}
+              {project.processIntro ??
+                "A structured workflow used to understand the problem, design the system and develop the project."}
             </p>
           </div>
 
@@ -975,8 +954,7 @@ export default async function ProjectPage({
           "
         >
           <p>
-            © {new Date().getFullYear()} Prathamesh
-            Rane
+            © {new Date().getFullYear()} {siteConfig.name}
           </p>
 
           <MagneticButton>

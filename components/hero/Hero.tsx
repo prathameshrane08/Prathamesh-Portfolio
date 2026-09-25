@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { ArrowDownRight } from "lucide-react";
+import { useLenis } from "lenis/react";
 
 import HeroTitle from "@/components/hero/HeroTitle";
 import RotatingRole from "@/components/hero/RotatingRole";
@@ -27,24 +28,21 @@ import MagneticButton from "@/components/ui/MagneticButton";
 // ============================================================
 
 export default function Hero() {
-  // ==========================================================
-  // SCROLL TO PROJECTS
-  //
-  // Finds the section with id="projects"
-  // and scrolls to it smoothly.
-  // ==========================================================
-  const scrollToProjects = () => {
-    const projectsSection =
-      document.querySelector("#projects");
+  const lenis = useLenis();
 
-    projectsSection?.scrollIntoView({
-      behavior: "smooth",
-    });
+  const scrollToProjects = () => {
+    if (lenis) {
+      lenis.scrollTo("#projects");
+      return;
+    }
+
+    document
+      .querySelector("#projects")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
-      id="top"
       className="
         relative
         flex

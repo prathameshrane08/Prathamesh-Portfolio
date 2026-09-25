@@ -1,30 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prathamesh Rane — Portfolio
 
-## Getting Started
+Personal portfolio covering AI, robotics and software engineering projects.
 
-First, run the development server:
+Live: https://prathamesh-portfolio-ruddy.vercel.app
+
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router) + React + TypeScript
+- Tailwind CSS v4
+- [Motion](https://motion.dev) for animation, [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/                 Routes, metadata, sitemap and robots
+  work/[slug]/       Project case study pages
+components/
+  hero/              Homepage hero
+  sections/          Homepage sections (About, Projects, Contact, …)
+  transitions/       Route transition overlay and link
+  ui/                Shared UI (cursor, loader, lightbox, magnetic button)
+data/
+  site.ts            Name, site URL, contact links and CV path
+  projects.ts        Project content for cards and case studies
+hooks/               Shared React hooks
+public/              CV, social preview and project images
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-
+- **Add or edit a project:** update `data/projects.ts`. Images go under `public/projects/<project>/`. The homepage, case study page and sitemap all pick up changes automatically.
+- **Change contact details or the domain:** update `data/site.ts`.

@@ -5,6 +5,8 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 
+import { useScrollLock } from "@/hooks/useScrollLock";
+
 // ============================================================
 // IMAGE LIGHTBOX
 //
@@ -34,39 +36,23 @@ export default function ImageLightbox({
   imageAlt,
   onClose,
 }: ImageLightboxProps) {
+  useScrollLock(isOpen);
+
   useEffect(() => {
     if (!isOpen) {
       return;
     }
 
-    // ========================================================
-    // ESCAPE KEY
-    // ========================================================
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }
     };
 
-    // ========================================================
-    // LOCK PAGE SCROLL
-    //
-    // Without this, the page behind the lightbox can still
-    // move while the fullscreen image is open.
-    // ========================================================
-    const previousOverflow = document.body.style.overflow;
-
-    document.body.style.overflow = "hidden";
-
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
-
-      window.removeEventListener(
-        "keydown",
-        handleKeyDown,
-      );
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
 
@@ -93,6 +79,7 @@ export default function ImageLightbox({
           role="dialog"
           aria-modal="true"
           aria-label="Expanded project image"
+          data-lenis-prevent
 
           className="
             fixed
