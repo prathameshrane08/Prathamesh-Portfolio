@@ -1,30 +1,3 @@
-// =============================================================
-// app/layout.tsx
-//
-// PURPOSE
-// -------
-// This is the Root Layout.
-//
-// Every page in the application is rendered inside this file.
-//
-// Responsibilities:
-//
-// ✓ Global Metadata (SEO)
-// ✓ Open Graph
-// ✓ Twitter Cards
-// ✓ Global CSS
-// ✓ Smooth Scrolling
-// ✓ Custom Cursor
-// ✓ Loading Screen
-// ✓ Scroll Progress Bar
-// ✓ Page Transition Provider
-// ✓ Transition Overlay
-// ✓ Page Fade Animation
-//
-// Documentation:
-// https://nextjs.org/docs/app/api-reference/file-conventions/layout
-// =============================================================
-
 import type { Metadata } from "next";
 
 import "./globals.css";
@@ -32,25 +5,9 @@ import "./globals.css";
 import AppEffects from "@/components/AppEffects";
 import SmoothScroll from "@/components/SmoothScroll";
 
-import PageTransition from "@/components/transitions/PageTransition";
 import TransitionOverlay from "@/components/transitions/TransitionOverlay";
 import { TransitionProvider } from "@/components/transitions/TransitionContext";
-
-// =============================================================
-// WEBSITE URL
-//
-// IMPORTANT
-// ----------
-// Update this if you connect a custom domain.
-//
-// Example:
-//
-// https://prathameshrane.com
-//
-// =============================================================
-
-const WEBSITE_URL =
-  "https://prathamesh-portfolio-ruddy.vercel.app";
+import { siteConfig } from "@/data/site";
 
 // =============================================================
 // GLOBAL METADATA
@@ -63,7 +20,7 @@ const WEBSITE_URL =
 // =============================================================
 
 export const metadata: Metadata = {
-  metadataBase: new URL(WEBSITE_URL),
+  metadataBase: new URL(siteConfig.url),
 
   title: {
     default:
@@ -101,7 +58,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Prathamesh Rane",
-      url: WEBSITE_URL,
+      url: siteConfig.url,
     },
   ],
 
@@ -143,7 +100,7 @@ export const metadata: Metadata = {
     description:
       "Portfolio showcasing Artificial Intelligence, Robotics, Machine Learning, Data Visualization and Software Engineering projects.",
 
-    url: WEBSITE_URL,
+    url: siteConfig.url,
 
     siteName: "Prathamesh Rane Portfolio",
 
@@ -198,31 +155,6 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-// =============================================================
-// ROOT LAYOUT
-//
-// Everything inside the application is rendered here.
-//
-// Order:
-//
-// TransitionProvider
-//      ↓
-//
-// AppEffects
-//      ↓
-//
-// TransitionOverlay
-//      ↓
-//
-// SmoothScroll
-//      ↓
-//
-// PageTransition
-//      ↓
-//
-// Current Page
-// =============================================================
-
 type RootLayoutProps = {
   children: React.ReactNode;
 };
@@ -235,32 +167,13 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body
-        className="
-          bg-[#f1efe9]
-          text-[#111111]
-          antialiased
-          overflow-x-hidden
-        "
-      >
-        {/* ===================================================
-            Global Transition Manager
-        ==================================================== */}
-
+      <body>
         <TransitionProvider>
-          {/* Loader + Cursor + Scroll Progress */}
           <AppEffects />
 
-          {/* Black transition overlay */}
           <TransitionOverlay />
 
-          {/* Smooth scrolling */}
-          <SmoothScroll>
-            {/* Fade animation for every page */}
-            <PageTransition>
-              {children}
-            </PageTransition>
-          </SmoothScroll>
+          <SmoothScroll>{children}</SmoothScroll>
         </TransitionProvider>
       </body>
     </html>

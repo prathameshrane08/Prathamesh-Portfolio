@@ -46,19 +46,7 @@ export default function TransitionLink({
   target,
   rel,
 
-  // ==========================================================
-  // IMPORTANT
-  //
-  // Everything we don't explicitly destructure goes here.
-  //
-  // Example:
-  //
-  // data-cursor="VIEW"
-  //
-  // becomes part of ...restProps
-  //
-  // and is forwarded to the actual <Link>.
-  // ==========================================================
+  // Forwarded to <Link> so attributes like data-cursor reach the <a>.
   ...restProps
 }: TransitionLinkProps) {
   const router = useRouter();
@@ -140,12 +128,6 @@ export default function TransitionLink({
       className={className}
       target={target}
       rel={rel}
-
-      // ======================================================
-      // THIS IS THE IMPORTANT FIX.
-      //
-      // data-cursor now reaches the real <a> element.
-      // ======================================================
       {...restProps}
     >
       {children}

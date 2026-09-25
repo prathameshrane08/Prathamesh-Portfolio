@@ -6,6 +6,7 @@ import { ArrowUpRight, X } from "lucide-react";
 
 import TransitionLink from "@/components/transitions/TransitionLink";
 import { siteConfig } from "@/data/site";
+import { useScrollLock } from "@/hooks/useScrollLock";
 
 type FullScreenMenuProps = {
   isOpen: boolean;
@@ -41,57 +42,42 @@ export default function FullScreenMenu({
 }: FullScreenMenuProps) {
   const [time, setTime] = useState("");
 
-  // Update the local Dresden time once every second.
-  useEffect(() => {
-    function updateTime() {
-      const currentTime = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Europe/Berlin",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      }).format(new Date());
+  useScrollLock(isOpen);
 
-      setTime(currentTime);
-    }
-
-    updateTime();
-
-    const interval = window.setInterval(updateTime, 1000);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, []);
-
-  // Prevent the page behind the menu from scrolling.
+  // While open: tick the local Dresden time and close on Escape.
   useEffect(() => {
     if (!isOpen) {
-      document.body.style.overflow = "";
       return;
     }
 
-    document.body.style.overflow = "hidden";
+    const formatter = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/Berlin",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+    function updateTime() {
+      setTime(formatter.format(new Date()));
+    }
 
-  // Allow Escape to close the menu.
-  useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         onClose();
       }
     }
 
+    updateTime();
+
+    const interval = window.setInterval(updateTime, 1000);
     window.addEventListener("keydown", handleEscape);
 
     return () => {
+      window.clearInterval(interval);
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [onClose]);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -100,6 +86,7 @@ export default function FullScreenMenu({
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
+          data-lenis-prevent
           initial={{
             y: "-100%",
           }}

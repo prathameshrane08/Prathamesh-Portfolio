@@ -30,6 +30,7 @@ export type Project = {
 
   background: string;
 
+  overviewHeading: string;
   overview: string;
   challenge: string;
   approach: string;
@@ -38,6 +39,10 @@ export type Project = {
   technologies: string[];
   metrics: ProjectMetric[];
   process: ProjectProcessStep[];
+
+  // Optional overrides for the "Development process" section
+  processHeading?: string;
+  processIntro?: string;
 
   // Images used on the homepage and project page
   cardImage?: string;
@@ -65,6 +70,9 @@ export const projects: Project[] = [
     institution: "LASR Lab · TU Dresden",
 
     background: "bg-[#d9ff43]",
+
+    overviewHeading:
+      "Building a robot-learning pipeline for household manipulation.",
 
     overview:
       "This research project explores how household robots can learn manipulation tasks inside realistic kitchen environments. The work covers simulation setup, environment exploration, teleoperation, demonstration collection, task development and preparation for policy learning.",
@@ -135,156 +143,158 @@ export const projects: Project[] = [
       },
     ],
 
-        cardImage: "/projects/robocasa/card.webp",
-        heroImage: "/projects/robocasa/hero.png",
+    cardImage: "/projects/robocasa/card.webp",
+    heroImage: "/projects/robocasa/hero.png",
 
-        gallery: [
-          {
-            src: "/projects/robocasa/overview.webp",
-            alt: "RoboCasa robot learning platform overview",
-            caption:
-              "RoboCasa combines diverse kitchen environments, household objects, manipulation skills and long-horizon robot-learning tasks.",
-          },
-          {
-            src: "/projects/robocasa/layouts.png",
-            alt: "Different RoboCasa kitchen layouts",
-            caption:
-              "RoboCasa provides visually and structurally diverse kitchen environments for household robot-learning experiments.",
-          },
-          {
-            src: "/projects/robocasa/environment-01.png",
-            alt: "RoboCasa simulated kitchen environment with robot",
-            caption:
-              "A simulated household environment used to explore robot interaction, manipulation and task execution.",
-          },
-          {
-            src: "/projects/robocasa/environment-02.png",
-            alt: "Alternative RoboCasa kitchen simulation",
-            caption:
-              "Different scene configurations help evaluate robot behaviour across varied household environments.",
-          },
-        ],
+    gallery: [
+      {
+        src: "/projects/robocasa/overview.webp",
+        alt: "RoboCasa robot learning platform overview",
+        caption:
+          "RoboCasa combines diverse kitchen environments, household objects, manipulation skills and long-horizon robot-learning tasks.",
+      },
+      {
+        src: "/projects/robocasa/layouts.png",
+        alt: "Different RoboCasa kitchen layouts",
+        caption:
+          "RoboCasa provides visually and structurally diverse kitchen environments for household robot-learning experiments.",
+      },
+      {
+        src: "/projects/robocasa/environment-01.png",
+        alt: "RoboCasa simulated kitchen environment with robot",
+        caption:
+          "A simulated household environment used to explore robot interaction, manipulation and task execution.",
+      },
+      {
+        src: "/projects/robocasa/environment-02.png",
+        alt: "Alternative RoboCasa kitchen simulation",
+        caption:
+          "Different scene configurations help evaluate robot behaviour across varied household environments.",
+      },
+    ],
     github: "https://github.com/prathameshrane08",
   },
 
   {
-  slug: "banking-ai-dashboard",
-  number: "02",
-  title: "AI-Powered Banking Dashboard",
-  shortTitle: "Banking AI",
-  category: "GENERATIVE AI · DATA STORYTELLING",
+    slug: "banking-ai-dashboard",
+    number: "02",
+    title: "AI-Powered Banking Dashboard",
+    shortTitle: "Banking AI",
+    category: "GENERATIVE AI · DATA STORYTELLING",
 
-  description:
-    "An ongoing personal-finance project exploring how AI-generated narratives can turn transaction data into understandable stories and actionable insights.",
+    description:
+      "An ongoing personal-finance project exploring how AI-generated narratives can turn transaction data into understandable stories and actionable insights.",
 
-  year: "2026",
-  duration: "Ongoing",
-  role: "Product Designer and Developer",
-  institution: "Independent Project",
+    year: "2026",
+    duration: "Ongoing",
+    role: "Product Designer and Developer",
+    institution: "Independent Project",
 
-  background: "bg-[#ff7557]",
+    background: "bg-[#ff7557]",
 
-  overview:
-    "This ongoing project explores an AI-powered data-storytelling experience for personal finance. Instead of requiring users to interpret charts independently, the dashboard is designed to combine visual exploration with concise natural-language explanations of their spending behaviour.",
+    overviewHeading: "Turning financial data into understandable stories.",
 
-  challenge:
-    "Traditional banking dashboards provide balances, charts and transaction histories, but users still have to determine what changed, what caused the change and whether it requires attention.",
+    overview:
+      "This ongoing project explores an AI-powered data-storytelling experience for personal finance. Instead of requiring users to interpret charts independently, the dashboard is designed to combine visual exploration with concise natural-language explanations of their spending behaviour.",
 
-  approach:
-    "I designed the concept around three storytelling questions: what changed, why did it change and what could the user do next. The proposed workflow combines transaction categorisation, period comparisons, interactive visualisations and AI-generated explanations.",
+    challenge:
+      "Traditional banking dashboards provide balances, charts and transaction histories, but users still have to determine what changed, what caused the change and whether it requires attention.",
 
-  outcome:
-    "The current concept establishes the dashboard structure, storytelling framework and interaction flow. Development is ongoing, with the next stage focused on implementing the data pipeline and AI-generated narrative layer.",
+    approach:
+      "I designed the concept around three storytelling questions: what changed, why did it change and what could the user do next. The proposed workflow combines transaction categorisation, period comparisons, interactive visualisations and AI-generated explanations.",
 
-  technologies: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Python",
-    "Large Language Models",
-    "Data Visualisation",
-    "PostgreSQL",
-  ],
+    outcome:
+      "The current concept establishes the dashboard structure, storytelling framework and interaction flow. Development is ongoing, with the next stage focused on implementing the data pipeline and AI-generated narrative layer.",
 
-  metrics: [
-    {
-      value: "3",
-      label: "Story layers",
-    },
-    {
-      value: "3",
-      label: "Exploration levels",
-    },
-    {
-      value: "AI",
-      label: "Narrative layer",
-    },
-    {
-      value: "WIP",
-      label: "Project status",
-    },
-  ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Python",
+      "Large Language Models",
+      "Data Visualisation",
+      "PostgreSQL",
+    ],
 
-  process: [
-    {
-      number: "01",
-      title: "Problem discovery",
-      description:
-        "Identified the gap between displaying financial data and helping users understand what their spending patterns actually mean.",
-    },
-    {
-      number: "02",
-      title: "Story framework",
-      description:
-        "Structured each financial narrative around three questions: what changed, why did it change and what could the user do next.",
-    },
-    {
-      number: "03",
-      title: "Exploration design",
-      description:
-        "Designed a drill-down experience from monthly spending patterns to categories, weekly behaviour and individual transactions.",
-    },
-    {
-      number: "04",
-      title: "AI narrative layer",
-      description:
-        "Designed the architecture for connecting structured financial data with personalised natural-language explanations and actionable insights.",
-    },
-  ],
+    metrics: [
+      {
+        value: "3",
+        label: "Story layers",
+      },
+      {
+        value: "3",
+        label: "Exploration levels",
+      },
+      {
+        value: "AI",
+        label: "Narrative layer",
+      },
+      {
+        value: "WIP",
+        label: "Project status",
+      },
+    ],
 
-  cardImage: "/projects/banking/card.png",
-  heroImage: "/projects/banking/card.png",
+    process: [
+      {
+        number: "01",
+        title: "Problem discovery",
+        description:
+          "Identified the gap between displaying financial data and helping users understand what their spending patterns actually mean.",
+      },
+      {
+        number: "02",
+        title: "Story framework",
+        description:
+          "Structured each financial narrative around three questions: what changed, why did it change and what could the user do next.",
+      },
+      {
+        number: "03",
+        title: "Exploration design",
+        description:
+          "Designed a drill-down experience from monthly spending patterns to categories, weekly behaviour and individual transactions.",
+      },
+      {
+        number: "04",
+        title: "AI narrative layer",
+        description:
+          "Designed the architecture for connecting structured financial data with personalised natural-language explanations and actionable insights.",
+      },
+    ],
 
-  /*
-  Gallery will be enabled once the dashboard
-  prototype visuals are ready.
+    cardImage: "/projects/banking/card.png",
+    heroImage: "/projects/banking/card.png",
 
-  gallery: [
-    {
-      src: "/projects/banking/spending-story.png",
-      alt: "AI-powered personal finance spending story",
-      caption:
-        "A narrative layer designed to explain significant changes in a user's spending behaviour.",
-    },
-    {
-      src: "/projects/banking/category-view.png",
-      alt: "Interactive spending category exploration",
-      caption:
-        "A drill-down interface for exploring spending by category, time period and transaction.",
-    },
-    {
-      src: "/projects/banking/insights.png",
-      alt: "Personalised financial insight concept",
-      caption:
-        "A concept for turning detected financial patterns into understandable and actionable recommendations.",
-    },
-  ],
-  */
+    /*
+    Gallery will be enabled once the dashboard
+    prototype visuals are ready.
 
-  github: "https://github.com/prathameshrane08",
-},
+    gallery: [
+      {
+        src: "/projects/banking/spending-story.png",
+        alt: "AI-powered personal finance spending story",
+        caption:
+          "A narrative layer designed to explain significant changes in a user's spending behaviour.",
+      },
+      {
+        src: "/projects/banking/category-view.png",
+        alt: "Interactive spending category exploration",
+        caption:
+          "A drill-down interface for exploring spending by category, time period and transaction.",
+      },
+      {
+        src: "/projects/banking/insights.png",
+        alt: "Personalised financial insight concept",
+        caption:
+          "A concept for turning detected financial patterns into understandable and actionable recommendations.",
+      },
+    ],
+    */
 
-    {
+    github: "https://github.com/prathameshrane08",
+  },
+
+  {
     slug: "cutato-booking-platform",
     number: "03",
     title: "Cutato Booking Platform",
@@ -299,6 +309,8 @@ export const projects: Project[] = [
     institution: "Independent Product",
 
     background: "bg-[#b8a6ff]",
+
+    overviewHeading: "Designing an intelligent booking experience.",
 
     overview:
       "Cutato is a full-stack booking platform designed to simplify how customers discover barbers, compare services and availability, receive personalised guidance and complete appointments through a unified digital experience.",
@@ -424,7 +436,9 @@ export const projects: Project[] = [
 
     background: "bg-[#8ed8ff]",
 
-    overview: 
+    overviewHeading: "Inferring semantic structure from linguistic data.",
+
+    overview:
       "This research explores how semantic maps can be inferred automatically by representing lexical observations as connectivity constraints and constructing sparse graphs that preserve those constraints.",
     
     challenge:
@@ -491,6 +505,10 @@ export const projects: Project[] = [
           "Evaluated agreement between inferred networks using pairwise Jaccard similarity and entropy-based stability.",
       },
     ],
+
+    processHeading: "From constraints to an inferred network.",
+    processIntro:
+      "A structured research workflow transforming linguistic connectivity constraints into interpretable semantic networks.",
 
     cardImage: "/projects/semantic-map/core.png",
     heroImage: "/projects/semantic-map/aggregated.png",
