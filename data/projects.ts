@@ -525,7 +525,7 @@ export const projects: Project[] = [
 
     year: "2024",
     duration: "One semester",
-    role: "Bachelor's thesis project",
+    role: "Team lead (Bachelor's thesis)",
     institution: "University of Mumbai",
 
     background: "bg-[#ffd166]",
@@ -533,13 +533,13 @@ export const projects: Project[] = [
     overviewHeading: "Bringing machine learning to everyday farming decisions.",
 
     overview:
-      "AgroSahayak was a Bachelor's thesis project in the final semester of the B.E. in Information Technology at the University of Mumbai. It applies machine learning to three practical agricultural questions: which crop suits a field, how its soil nutrients should be corrected, and whether a plant shows signs of disease.",
+      "I led the team behind AgroSahayak, a Bachelor's thesis project in the final semester of the B.E. in Information Technology at the University of Mumbai. The project applies machine learning to three practical agricultural questions: which crop suits a field, how its soil nutrients should be corrected, and whether a plant shows signs of disease.",
 
     challenge:
       "Crop and fertilizer choices depend on several interacting factors, including soil nutrients, acidity, rainfall and local weather, and plant diseases are difficult to identify without expert knowledge. The challenge was to turn these inputs into clear recommendations through a simple web interface.",
 
     approach:
-      "The platform is a Flask web application with three tools. Crop recommendation combines soil nitrogen, phosphorus, potassium, pH and rainfall with live temperature and humidity from the OpenWeatherMap API; six classifiers were compared and a Random Forest model is used in the app. Fertilizer suggestions compare the entered soil nutrients with each crop's requirements, and disease detection classifies uploaded leaf images with a ResNet9 convolutional network.",
+      "The platform is a Flask web application with three tools. Crop recommendation combines soil nitrogen, phosphorus, potassium, pH and rainfall with live temperature and humidity from the OpenWeatherMap API; six classifiers were compared and a Random Forest model is used in the app. Fertilizer suggestions compare the entered soil nutrients with each crop's requirements, and plant-disease detection, based on the open-source Harvestify implementation, classifies uploaded leaf images with a ResNet9 convolutional network.",
 
     outcome:
       "The Random Forest model reached 99.1% accuracy on the held-out test set across 22 crops, and the disease model recognises 38 plant disease and healthy-leaf classes. Together the tools form a single assistant for crop planning, soil management and plant health.",
@@ -591,7 +591,7 @@ export const projects: Project[] = [
         number: "03",
         title: "Disease detection",
         description:
-          "Integrated a ResNet9 image classifier that identifies plant diseases from uploaded leaf photos.",
+          "Integrated plant-disease detection based on the open-source Harvestify implementation, using a ResNet9 image classifier on uploaded leaf photos.",
       },
       {
         number: "04",
