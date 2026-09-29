@@ -175,8 +175,138 @@ export const projects: Project[] = [
   },
 
   {
-    slug: "cutato-booking-platform",
+    slug: "narrai-bank",
     number: "02",
+    title: "NarrAI: Verified Financial Storytelling",
+    shortTitle: "NarrAI",
+    category: "Generative AI · Fintech · Full-Stack Development",
+    description:
+      "A white-label banking product that turns a customer's transactions into short, plain-language stories in which every number is calculated by code and verified before it is shown.",
+
+    year: "2026",
+    duration: "Ongoing",
+    role: "Product Designer and Full-Stack Developer",
+    institution: "Independent Product",
+
+    background: "bg-[#7cf5c4]",
+
+    overviewHeading: "Code calculates. AI narrates.",
+
+    overview:
+      "NarrAI explains a bank customer's spending through four questions: what happened, why it happened, what it means and what they can do next. Analytics code computes every figure, a language model only words the story, and guardrails check each sentence before it reaches the customer. Banks can run it under their own brand.",
+
+    challenge:
+      "Banking apps show balances and charts, but customers still have to work out what changed and why. Language models can explain this in plain words, but in banking a single invented number is unacceptable. The challenge was to use AI for the explanation without letting it become the source of any fact.",
+
+    approach:
+      "I built a pandas analytics layer that finds category changes, the merchants behind them, spending patterns, budget suggestions and unusual payments. Llama 3.2, running locally through Ollama, receives these verified facts and writes one sentence per question. Guardrails reject any sentence containing a number that is not in the facts, speculative language or a missing key entity, and fall back to deterministic templates. The same approach powers a chat that answers questions about the customer's money and declines investment or loan advice.",
+
+    outcome:
+      "In the evaluation, no unverified number reached a customer across 216 story sentences and 30 chat answers. A line-by-line review found 214 of 216 story sentences correct; a new guardrail now catches the two errors it found. The product includes white-label branding, budgets, camt.053, MT940 and CSV statement import, bank API keys with customer sessions, GDPR controls, monitoring and a public demo.",
+
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Python",
+      "FastAPI",
+      "pandas",
+      "PostgreSQL",
+      "Llama 3.2 (Ollama)",
+      "Docker",
+    ],
+
+    metrics: [
+      {
+        value: "0",
+        label: "Unverified numbers shown",
+      },
+      {
+        value: "214/216",
+        label: "Story sentences correct",
+      },
+      {
+        value: "30/30",
+        label: "Chat questions routed correctly",
+      },
+      {
+        value: "131",
+        label: "Backend tests",
+      },
+    ],
+
+    process: [
+      {
+        number: "01",
+        title: "Analytics",
+        description:
+          "Computed category changes, merchant drivers, weekend patterns, budget savings and unusual payments from transaction data with pandas.",
+      },
+      {
+        number: "02",
+        title: "AI narration",
+        description:
+          "Gave a local Llama 3.2 model a fact sheet and asked it for one sentence per storytelling question.",
+      },
+      {
+        number: "03",
+        title: "Guardrails",
+        description:
+          "Checked every sentence against the verified facts, fell back to templates when a check failed, and labelled each sentence as AI-verified or taken from the facts.",
+      },
+      {
+        number: "04",
+        title: "Bank-ready product",
+        description:
+          "Added white-label tenants, statement import, authentication, rate limits, GDPR controls, monitoring and a Docker and Vercel deployment.",
+      },
+    ],
+
+    processHeading: "From transactions to a verified story.",
+    processIntro:
+      "A pipeline in which code produces every fact and the language model is only allowed to put those facts into words.",
+
+    cardImage: "/projects/narrai/overview.jpg",
+    heroImage: "/projects/narrai/overview.jpg",
+
+    gallery: [
+      {
+        src: "/projects/narrai/overview.jpg",
+        alt: "NarrAI monthly spending story",
+        caption:
+          "The monthly story answers what happened, why, what it means and what to do next, with each sentence badged as AI-verified or taken from the facts.",
+      },
+      {
+        src: "/projects/narrai/chat-verified-answer.jpg",
+        alt: "NarrAI chat answer with its calculation",
+        caption:
+          "The chat answers questions about the customer's money and shows the calculation behind each answer.",
+      },
+      {
+        src: "/projects/narrai/insight-feed.jpg",
+        alt: "NarrAI insight feed",
+        caption:
+          "The insight feed highlights spending changes, patterns and unusual payments.",
+      },
+      {
+        src: "/projects/narrai/budgets.jpg",
+        alt: "NarrAI budgets with progress tracking",
+        caption:
+          "Budgets track progress through the month, with suggestions based on past spending.",
+      },
+      {
+        src: "/projects/narrai/white-label-kestrel.jpg",
+        alt: "NarrAI white-labelled for a fictional bank",
+        caption:
+          "Each bank can run NarrAI under its own brand, shown here for the fictional Kestrel Bank.",
+      },
+    ],
+
+    liveDemo: "https://narrai-bank.vercel.app",
+  },
+
+  {
+    slug: "cutato-booking-platform",
+    number: "03",
     title: "Cutato Booking Platform",
     shortTitle: "Cutato",
     category: "Full-Stack Development · Conversational AI",
@@ -302,7 +432,7 @@ export const projects: Project[] = [
 
   {
     slug: "semantic-map-inference",
-    number: "03",
+    number: "04",
     title: "Semantic Map Network Inference",
     shortTitle: "Semantic Maps",
     category: "Graph Algorithms · Computational Linguistics",
@@ -424,7 +554,7 @@ export const projects: Project[] = [
 
   {
     slug: "llm-bias-explainability",
-    number: "04",
+    number: "05",
     title: "Bias, Harm and False Refusals in LLMs",
     shortTitle: "LLM Bias",
     category: "Explainable AI · Large Language Models",
@@ -516,7 +646,7 @@ export const projects: Project[] = [
 
   {
     slug: "agrosahayak",
-    number: "05",
+    number: "06",
     title: "AgroSahayak Agricultural Assistant",
     shortTitle: "AgroSahayak",
     category: "Machine Learning · Computer Vision · Agriculture",
