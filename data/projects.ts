@@ -301,6 +301,7 @@ export const projects: Project[] = [
       },
     ],
 
+    github: "https://github.com/prathameshrane08/narrai-bank",
     liveDemo: "https://narrai-bank.vercel.app",
   },
 
