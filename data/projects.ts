@@ -52,6 +52,8 @@ export type Project = {
   // External project links
   github?: string;
   liveDemo?: string;
+  // Further GitHub links, e.g. a team repository
+  extraLinks?: { label: string; href: string }[];
 };
 
 export const projects: Project[] = [
@@ -177,7 +179,13 @@ export const projects: Project[] = [
       },
     ],
 
-    github: "https://github.com/pratiksecur/meyer-ruletrace",
+    github: "https://github.com/prathameshrane08/rulemate",
+    extraLinks: [
+      {
+        label: "Team repo (RuleTrace)",
+        href: "https://github.com/pratiksecur/meyer-ruletrace",
+      },
+    ],
   },
 
   {

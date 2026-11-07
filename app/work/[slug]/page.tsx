@@ -775,7 +775,8 @@ export default async function ProjectPage({
 
           {/* External links */}
           {(hasGitHubLink ||
-            hasLiveDemoLink) && (
+            hasLiveDemoLink ||
+            (project.extraLinks?.length ?? 0) > 0) && (
             <div className="mt-14 flex flex-wrap gap-4">
               {hasGitHubLink && (
                 <MagneticButton>
@@ -815,6 +816,48 @@ export default async function ProjectPage({
                   </a>
                 </MagneticButton>
               )}
+
+              {project.extraLinks
+                ?.filter((link) => isValidProjectLink(link.href))
+                .map((link) => (
+                  <MagneticButton key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor="OPEN"
+                      className="
+                        group
+                        inline-flex
+                        items-center
+                        gap-3
+                        rounded-full
+                        border
+                        border-black/25
+                        px-7
+                        py-4
+                        transition-colors
+                        duration-300
+                        hover:bg-black
+                        hover:text-white
+                      "
+                    >
+                      <FaGithub className="h-[19px] w-[19px]" />
+
+                      <span>{link.label}</span>
+
+                      <ArrowUpRight
+                        size={17}
+                        className="
+                          transition-transform
+                          duration-300
+                          group-hover:translate-x-1
+                          group-hover:-translate-y-1
+                        "
+                      />
+                    </a>
+                  </MagneticButton>
+                ))}
 
               {hasLiveDemoLink && (
                 <MagneticButton>
