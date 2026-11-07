@@ -56,8 +56,133 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "robocasa-robot-learning",
+    slug: "ruletrace-rulemate",
     number: "01",
+    title: "RuleTrace & RuleMate: Ship-Design Compliance",
+    shortTitle: "RuleMate",
+    category: "Generative AI · RAG · Engineering Compliance",
+    description:
+      "A hackathon tool that checks ship designs against maritime regulations. I built its RuleMate Copilot, which answers rule questions with a clause citation on every sentence and lets code, not the model, decide what is true.",
+
+    year: "2026",
+    duration: "Hackathon + rebuild",
+    role: "Copilot Developer (team of 3); standalone rebuild on my own",
+    institution: "Since AI Hackathon 2026 · Meyer Turku challenge",
+
+    background: "bg-[#9ec9ff]",
+
+    overviewHeading: "Every answer traced to a clause.",
+
+    overview:
+      "At the Since AI Hackathon 2026 we took Meyer Turku's challenge: automated class and regulatory compliance checking for ship design. With Pratik Gupta and Sahil Pimple I built RuleTrace, which shows each failing part on the 3D model with the rule, what was required and how to fix it. My part was the RuleMate Copilot, an assistant that answers questions about the regulations, checks design values and reads ship drawings. Afterwards I rebuilt RuleMate on my own as a standalone, fully evaluated tool.",
+
+    challenge:
+      "Ship designers must comply with thousands of pages of rules such as SOLAS, MLC and US regulations. A language model can find and explain these rules quickly, but in engineering a single invented number or a wrong clause reference is dangerous. The challenge was to use AI for speed while making every answer verifiable, and to keep confidential design data on the company's own machines.",
+
+    approach:
+      "Rule documents are split into clauses by their own numbering. A question is answered by clause-ID lookup plus hybrid search (BM25 and embeddings) that follows cross-references. The language model must cite a clause on every sentence, and code then checks each citation, number and quote against the cited clause; a draft that fails twice is replaced by the clause text itself. Compliance verdicts are computed in code with unit conversion, never by the model. For drawings, OCR and Gemini propose readings, and a reading is used only when code finds it on the sheet. A confidential mode runs only local models through Ollama.",
+
+    outcome:
+      "On 45 test questions, retrieval found the right clause in the top five every time, every unanswerable question was correctly refused, and no draft that failed a check was ever shown. The local qwen3:8b model matched the best cloud model with 92% verified answers on fresh questions. Compliance verdicts were all correct on three labelled designs, every planted defect was caught, and OCR found 34 of 34 berth labels on a real 1990 research-ship drawing. The standalone version has 113 tests.",
+
+    technologies: [
+      "Python",
+      "FastAPI",
+      "Streamlit",
+      "BM25 + embeddings (RAG)",
+      "Ollama (qwen3:8b)",
+      "Groq",
+      "Gemini",
+      "RapidOCR",
+      "pint",
+    ],
+
+    metrics: [
+      {
+        value: "100%",
+        label: "Right clause in top 5",
+      },
+      {
+        value: "0",
+        label: "Unchecked answers shown",
+      },
+      {
+        value: "92%",
+        label: "Local model answers verified",
+      },
+      {
+        value: "34/34",
+        label: "Berth labels read on a real drawing",
+      },
+    ],
+
+    process: [
+      {
+        number: "01",
+        title: "Rule ingestion",
+        description:
+          "Split regulation texts such as 46 CFR 190 and the MLC 2006 into clauses with IDs, page numbers and resolved cross-references.",
+      },
+      {
+        number: "02",
+        title: "Retrieval",
+        description:
+          "Combined clause-ID lookup, BM25 and embedding search, followed cross-references and refused questions the rules cannot answer.",
+      },
+      {
+        number: "03",
+        title: "Checked answers",
+        description:
+          "Required a citation on every sentence and verified each citation, number and quote in code before showing an answer.",
+      },
+      {
+        number: "04",
+        title: "Designs and drawings",
+        description:
+          "Compared design values with rule limits in code and read ship drawings with OCR and Gemini, using a reading only when code confirmed it.",
+      },
+    ],
+
+    processHeading: "From regulation text to a verified answer.",
+    processIntro:
+      "A pipeline in which the language model may only word what the retrieved clauses say, and code decides whether it did.",
+
+    cardImage: "/projects/rulemate/copilot-verified-answer.jpg",
+    heroImage: "/projects/rulemate/3d-finding.jpg",
+
+    gallery: [
+      {
+        src: "/projects/rulemate/3d-finding.jpg",
+        alt: "RuleTrace showing a failing door threshold on the 3D model",
+        caption:
+          "RuleTrace (team): a failing part turns red on the 3D model, with the requirement, the design value, the rule text and a fix.",
+      },
+      {
+        src: "/projects/rulemate/copilot-verified-answer.jpg",
+        alt: "RuleMate Copilot answer with a clause citation",
+        caption:
+          "RuleMate Copilot (my part): a verified answer from a local model, citing MLC 2006 and showing the clause it comes from.",
+      },
+      {
+        src: "/projects/rulemate/check-values.jpg",
+        alt: "RuleMate comparing design values with rule limits",
+        caption:
+          "Check values: each design value compared with its rule limit in code, with the clause behind every PASS and FAIL.",
+      },
+      {
+        src: "/projects/rulemate/accuracy.jpg",
+        alt: "RuleMate accuracy tab comparing language models",
+        caption:
+          "Accuracy: every model measured on fresh, held-out and development questions; the local model ties the best cloud model.",
+      },
+    ],
+
+    github: "https://github.com/pratiksecur/meyer-ruletrace",
+  },
+
+  {
+    slug: "robocasa-robot-learning",
+    number: "02",
     title: "RoboCasa Robot Learning Pipeline",
     shortTitle: "RoboCasa",
     category: "Robotics · Simulation · Artificial Intelligence",
@@ -176,7 +301,7 @@ export const projects: Project[] = [
 
   {
     slug: "narrai-bank",
-    number: "02",
+    number: "03",
     title: "NarrAI: Verified Financial Storytelling",
     shortTitle: "NarrAI",
     category: "Generative AI · Fintech · Full-Stack Development",
@@ -307,7 +432,7 @@ export const projects: Project[] = [
 
   {
     slug: "cutato-booking-platform",
-    number: "03",
+    number: "04",
     title: "Cutato Booking Platform",
     shortTitle: "Cutato",
     category: "Full-Stack Development · Conversational AI",
@@ -433,7 +558,7 @@ export const projects: Project[] = [
 
   {
     slug: "semantic-map-inference",
-    number: "04",
+    number: "05",
     title: "Semantic Map Network Inference",
     shortTitle: "Semantic Maps",
     category: "Graph Algorithms · Computational Linguistics",
@@ -555,7 +680,7 @@ export const projects: Project[] = [
 
   {
     slug: "llm-bias-explainability",
-    number: "05",
+    number: "06",
     title: "Bias, Harm and False Refusals in LLMs",
     shortTitle: "LLM Bias",
     category: "Explainable AI · Large Language Models",
@@ -647,7 +772,7 @@ export const projects: Project[] = [
 
   {
     slug: "agrosahayak",
-    number: "06",
+    number: "07",
     title: "AgroSahayak Agricultural Assistant",
     shortTitle: "AgroSahayak",
     category: "Machine Learning · Computer Vision · Agriculture",
